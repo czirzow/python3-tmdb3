@@ -198,7 +198,7 @@ class FileCacheObject(CacheObject):
     def load(self, fd):
         fd.seek(self.position)
         self._buff.seek(0)
-        self._buff.write(fd.read(self.size))
+        self._buff.write(fd.read(self.size).decode())
 
     def dumpslot(self, fd):
         pos = fd.tell()
@@ -207,7 +207,7 @@ class FileCacheObject(CacheObject):
     def dumpdata(self, fd):
         self.size
         fd.seek(self.position)
-        fd.write(self._buff.getvalue())
+        fd.write(self._buff.getvalue().encode())
 
 
 class FileEngine(CacheEngine):
