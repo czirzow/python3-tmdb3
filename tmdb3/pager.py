@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#-----------------------
+# -----------------------
 # Name: pager.py    List-like structure designed for handling paged results
 # Python Library
 # Author: Raymond Wagner
-#-----------------------
-
+# -----------------------
+from abc import ABC
 from collections import Sequence, Iterator
 
 
@@ -18,7 +18,7 @@ class PagedIterator(Iterator):
     def __iter__(self):
         return self
 
-    def next(self):
+    def __next__(self):
         self._index += 1
         if self._index == self._len:
             raise StopIteration
@@ -64,7 +64,7 @@ class PagedList(Sequence):
 
     def __getitem__(self, index):
         if isinstance(index, slice):
-            return [self[x] for x in xrange(*index.indices(len(self)))]
+            return [self[x] for x in range(*index.indices(len(self)))]
         if index >= len(self):
             raise IndexError("list index outside range")
         if (index >= len(self._data)) \
@@ -97,7 +97,7 @@ class PagedList(Sequence):
                                   "by subclass")
 
 
-class PagedRequest(PagedList):
+class PagedRequest(ABC, PagedList):
     """
     Derived PageList that provides a list-like object with automatic
     paging intended for use with search requests.
