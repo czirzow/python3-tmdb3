@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#-----------------------
+# -----------------------
 # Name: cache_engine.py
 # Python Library
 # Author: Raymond Wagner
 # Purpose: Base cache engine class for collecting registered engines
-#-----------------------
+# -----------------------
 
 import time
 from weakref import ref
@@ -28,6 +28,7 @@ class Engines(object):
     def __contains__(self, key):
         return self._engines.__contains__(key)
 
+
 Engines = Engines()
 
 
@@ -43,8 +44,7 @@ class CacheEngineType(type):
             Engines.register(cls)
 
 
-class CacheEngine(object):
-    __metaclass__ = CacheEngineType
+class CacheEngine(object, metaclass=CacheEngineType):
     name = 'unspecified'
 
     def __init__(self, parent):
@@ -52,10 +52,13 @@ class CacheEngine(object):
 
     def configure(self):
         raise RuntimeError
+
     def get(self, date):
         raise RuntimeError
+
     def put(self, key, value, lifetime):
         raise RuntimeError
+
     def expire(self, key):
         raise RuntimeError
 
@@ -81,4 +84,3 @@ class CacheObject(object):
     @property
     def remaining(self):
         return max((self.creation + self.lifetime) - time.time(), 0)
-
