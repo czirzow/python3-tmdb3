@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#-----------------------
+# -----------------------
 # Name: tmdb_api.py    Simple-to-use Python interface to TMDB's API v3
 # Python Library
 # Author: Raymond Wagner
@@ -11,7 +11,7 @@
 #          http://help.themoviedb.org/kb/api/about-3
 # License: Creative Commons GNU GPL v2
 # (http://creativecommons.org/licenses/GPL/2.0/)
-#-----------------------
+# -----------------------
 
 __title__ = ("tmdb_api - Simple-to-use Python interface to TMDB's API v3 " +
             "(www.themoviedb.org)")
@@ -67,17 +67,14 @@ __version__ = "v0.7.2"
 #        Fix unicode issues with search result object names
 #        Temporary fix for youtube videos with malformed URLs
 
-from request import set_key, Request
-from util import Datapoint, Datalist, Datadict, Element, NameRepr, SearchRepr
-from pager import PagedRequest
-from locales import get_locale, set_locale
-from tmdb_auth import get_session, set_session
-from tmdb_exceptions import *
-
-import json
-import urllib
-import urllib2
 import datetime
+
+from .request import set_key, Request
+from .util import Datapoint, Datalist, Datadict, Element, NameRepr, SearchRepr
+from .pager import PagedRequest
+from .locales import get_locale, set_locale
+from .tmdb_auth import get_session, set_session
+from .tmdb_exceptions import *
 
 DEBUG = False
 
@@ -89,12 +86,11 @@ def process_date(datestr):
         import sys
         import warnings
         import traceback
-        _,_,tb = sys.exc_info()
-        f,l,_,_ = traceback.extract_tb(tb)[-1]
-        warnings.warn_explicit(('"{0}" is not a supported date format. ' +
-                                'Please fix upstream data at ' +
-                                'http://www.themoviedb.org.'
-                               ).format(datestr), Warning, f, l)
+        _, _, tb = sys.exc_info()
+        f, l, _, _ = traceback.extract_tb(tb)[-1]
+        warnings.warn_explicit(f'"{datestr}" is not a supported date format. '
+                               f'Please fix upstream data at '
+                               f'http://www.themoviedb.org.', Warning, f, l)
         return None
 
 
@@ -103,6 +99,7 @@ class Configuration(Element):
 
     def _populate(self):
         return Request('configuration')
+
 
 Configuration = Configuration()
 
@@ -154,6 +151,7 @@ def searchMovieWithYear(query, locale=None, adult=False):
 class MovieSearchResult(SearchRepr, PagedRequest):
     """Stores a list of search matches."""
     _name = None
+
     def __init__(self, request, locale=None):
         if locale is None:
             locale = get_locale()
@@ -161,21 +159,27 @@ class MovieSearchResult(SearchRepr, PagedRequest):
                     request.new(language=locale.language),
                     lambda x: Movie(raw=x, locale=locale))
 
+
 def searchSeries(query, first_air_date_year=None, search_type=None, locale=None):
     return SeriesSearchResult(
-        Request('search/tv', query=query, first_air_date_year=first_air_date_year, search_type=search_type),
+        Request('search/tv',
+                query=query,
+                first_air_date_year=first_air_date_year,
+                search_type=search_type),
         locale=locale)
 
 
 class SeriesSearchResult(SearchRepr, PagedRequest):
     """Stores a list of search matches."""
     _name = None
+
     def __init__(self, request, locale=None):
         if locale is None:
             locale = get_locale()
         super(SeriesSearchResult, self).__init__(
                     request.new(language=locale.language),
                     lambda x: Series(raw=x, locale=locale))
+
 
 def searchPerson(query, adult=False):
     return PeopleSearchResult(Request('search/person', query=query,
@@ -185,6 +189,7 @@ def searchPerson(query, adult=False):
 class PeopleSearchResult(SearchRepr, PagedRequest):
     """Stores a list of search matches."""
     _name = None
+
     def __init__(self, request):
         super(PeopleSearchResult, self).__init__(
                     request, lambda x: Person(raw=x))
@@ -197,6 +202,7 @@ def searchStudio(query):
 class StudioSearchResult(SearchRepr, PagedRequest):
     """Stores a list of search matches."""
     _name = None
+
     def __init__(self, request):
         super(StudioSearchResult, self).__init__(
                     request, lambda x: Studio(raw=x))
@@ -209,6 +215,7 @@ def searchList(query, adult=False):
 class ListSearchResult(SearchRepr, PagedRequest):
     """Stores a list of search matches."""
     _name = None
+
     def __init__(self, request):
         super(ListSearchResult, self).__init__(
                     request, lambda x: List(raw=x))
@@ -216,12 +223,13 @@ class ListSearchResult(SearchRepr, PagedRequest):
 
 def searchCollection(query, locale=None):
     return CollectionSearchResult(Request('search/collection', query=query),
-                           locale=locale)
+                                  locale=locale)
 
 
 class CollectionSearchResult(SearchRepr, PagedRequest):
     """Stores a list of search matches."""
-    _name=None
+    _name = None
+
     def __init__(self, request, locale=None):
         if locale is None:
             locale = get_locale()
@@ -247,20 +255,20 @@ class Image(Element):
         if size not in self.sizes():
             raise TMDBImageSizeError
         url = Configuration.images['base_url'].rstrip('/')
-        return url+u'/{0}/{1}'.format(size, self.filename)
+        return f'{url}/{size}/{self.filename}'
 
     # sort preferring locale's language, but keep remaining ordering consistent
     def __lt__(self, other):
         if not isinstance(other, Image):
             return False
-        return (self.language == self._locale.language) \
-                and (self.language != other.language)
+        return (self.language == self._locale.language) and (
+                self.language != other.language)
 
     def __gt__(self, other):
         if not isinstance(other, Image):
             return True
-        return (self.language != other.language) \
-                and (other.language == self._locale.language)
+        return (self.language != other.language) and (
+                other.language == self._locale.language)
 
     # direct match for comparison
     def __eq__(self, other):
@@ -269,14 +277,14 @@ class Image(Element):
         return self.filename == other.filename
 
     # special handling for boolean to see if exists
-    def __nonzero__(self):
+    def __bool__(self):
         if len(self.filename) == 0:
             return False
         return True
 
     def __repr__(self):
         # BASE62 encoded filename, no need to worry about unicode
-        return u"<{0.__class__.__name__} '{0.filename}'>".format(self)
+        return f"<{self.__class__.__name__} '{self.filename}'>"
 
 
 class Backdrop(Image):
@@ -300,24 +308,23 @@ class Logo(Image):
 
 
 class AlternateTitle(Element):
-    country     = Datapoint('iso_3166_1')
-    title       = Datapoint('title')
+    country = Datapoint('iso_3166_1')
+    title = Datapoint('title')
 
     # sort preferring locale's country, but keep remaining ordering consistent
     def __lt__(self, other):
-        return (self.country == self._locale.country) \
-                and (self.country != other.country)
+        return (self.country == self._locale.country) and (
+                self.country != other.country)
 
     def __gt__(self, other):
-        return (self.country != other.country) \
-                and (other.country == self._locale.country)
+        return (self.country != other.country) and (
+                other.country == self._locale.country)
 
     def __eq__(self, other):
         return self.country == other.country
 
     def __repr__(self):
-        return u"<{0.__class__.__name__} '{0.title}' ({0.country})>"\
-               .format(self).encode('utf-8')
+        return f"<{self.__class__.__name__} '{self.title}' ({self.country})>"
 
 
 class Person(Element):
@@ -334,17 +341,17 @@ class Person(Element):
     aliases = Datalist('also_known_as')
 
     def __repr__(self):
-        return u"<{0.__class__.__name__} '{0.name}'>"\
-                            .format(self).encode('utf-8')
+        return f"<{self.__class__.__name__} '{self.name}'>"
 
     def _populate(self):
-        return Request('person/{0}'.format(self.id))
+        return Request(f'person/{self.id}')
 
     def _populate_credits(self):
-        return Request('person/{0}/credits'.format(self.id),
+        return Request(f'person/{self.id}/credits',
                        language=self._locale.language)
+
     def _populate_images(self):
-        return Request('person/{0}/images'.format(self.id))
+        return Request(f'person/{self.id}/images')
 
     roles = Datalist('cast', handler=lambda x: ReverseCast(raw=x),
                      poller=_populate_credits)
@@ -358,8 +365,8 @@ class Cast(Person):
     order = Datapoint('order')
 
     def __repr__(self):
-        return u"<{0.__class__.__name__} '{0.name}' as '{0.character}'>"\
-               .format(self).encode('utf-8')
+        return (
+            f"<{self.__class__.__name__} '{self.name}' as '{self.character}'>")
 
 
 class Crew(Person):
@@ -367,26 +374,26 @@ class Crew(Person):
     department = Datapoint('department')
 
     def __repr__(self):
-        return u"<{0.__class__.__name__} '{0.name}','{0.job}'>"\
-               .format(self).encode('utf-8')
+        return f"<{self.__class__.__name__} '{self.name}','{self.job}'>"
 
 
 class Keyword(Element):
-    id   = Datapoint('id')
+    id = Datapoint('id')
     name = Datapoint('name')
 
     def __repr__(self):
-        return u"<{0.__class__.__name__} '{0.name}'>"\
-               .format(self).encode('utf-8')
+        return f"<{self.__class__.__name__} '{self.name}'>"
 
 
 class Release(Element):
     certification = Datapoint('certification')
     country = Datapoint('iso_3166_1')
     releasedate = Datapoint('release_date', handler=process_date)
+
     def __repr__(self):
-        return u"<{0.__class__.__name__} '{0.country}', {0.releasedate}>"\
-               .format(self).encode('utf-8')
+        return (
+            f"<{self.__class__.__name__} '{self.country}', {self.releasedate}>"
+        )
 
 
 class Trailer(Element):
@@ -397,12 +404,12 @@ class Trailer(Element):
 
 class YoutubeTrailer(Trailer):
     def geturl(self):
-        self.source = self.source.encode('ascii',errors='ignore')
-        return "http://www.youtube.com/watch?v={0}".format(self.source)
+        self.source = self.source.encode('ascii', errors='ignore')
+        return f"http://www.youtube.com/watch?v={self.source}"
 
     def __repr__(self):
         # modified BASE64 encoding, no need to worry about unicode
-        return u"<{0.__class__.__name__} '{0.name}'>".format(self)
+        return f"<{self.__class__.__name__} '{self.name}'>"
 
 
 class AppleTrailer(Element):
@@ -410,7 +417,7 @@ class AppleTrailer(Element):
     sources = Datadict('sources', handler=Trailer, attr='size')
 
     def sizes(self):
-        return self.sources.keys()
+        return list(self.sources.keys())
 
     def geturl(self, size=None):
         if size is None:
@@ -421,7 +428,7 @@ class AppleTrailer(Element):
         return self.sources[size].source
 
     def __repr__(self):
-        return u"<{0.__class__.__name__} '{0.name}'>".format(self)
+        return f"<{self.__class__.__name__} '{self.name}'>"
 
 
 class Translation(Element):
@@ -430,8 +437,7 @@ class Translation(Element):
     englishname = Datapoint('english_name')
 
     def __repr__(self):
-        return u"<{0.__class__.__name__} '{0.name}' ({0.language})>"\
-               .format(self).encode('utf-8')
+        return f"<{self.__class__.__name__} '{self.name}' ({self.language})>"
 
 
 class Genre(NameRepr, Element):
@@ -439,15 +445,15 @@ class Genre(NameRepr, Element):
     name = Datapoint('name')
 
     def _populate_movies(self):
-        return Request('genre/{0}/movies'.format(self.id), \
+        return Request(f'genre/{self.id}/movies',
                        language=self._locale.language)
 
     @property
     def movies(self):
         if 'movies' not in self._data:
-            search = MovieSearchResult(self._populate_movies(), \
+            search = MovieSearchResult(self._populate_movies(),
                                        locale=self._locale)
-            search._name = u"{0.name} Movies".format(self)
+            search._name = "{0.name} Movies".format(self)
             self._data['movies'] = search
         return self._data['movies']
 
@@ -484,7 +490,7 @@ class Studio(NameRepr, Element):
         if 'movies' not in self._data:
             search = MovieSearchResult(self._populate_movies(),
                                        locale=self._locale)
-            search._name = u"{0.name} Movies".format(self)
+            search._name = f"{self.id.name} Movies"
             self._data['movies'] = search
         return self._data['movies']
 
@@ -536,7 +542,7 @@ class Movie(Element):
             session = get_session()
         account = Account(session=session)
         res = MovieSearchResult(
-                    Request('account/{0}/favorite_movies'.format(account.id),
+                    Request(f'account/{account.id}/favorite_movies',
                             session_id=session.sessionid))
         res._name = "Favorites"
         return res
@@ -547,7 +553,7 @@ class Movie(Element):
             session = get_session()
         account = Account(session=session)
         res = MovieSearchResult(
-                    Request('account/{0}/rated_movies'.format(account.id),
+                    Request(f'account/{account.id}/rated_movies',
                             session_id=session.sessionid))
         res._name = "Movies You Rated"
         return res
@@ -558,7 +564,7 @@ class Movie(Element):
             session = get_session()
         account = Account(session=session)
         res = MovieSearchResult(
-                    Request('account/{0}/movie_watchlist'.format(account.id),
+                    Request(f'account/{account.id}/movie_watchlist',
                             session_id=session.sessionid))
         res._name = "Movies You're Watching"
         return res
@@ -568,10 +574,10 @@ class Movie(Element):
         try:
             # assume string
             if not imdbid.startswith('tt'):
-                imdbid = "tt{0:0>7}".format(imdbid)
+                imdbid = f"tt{imdbid:0>7}"
         except AttributeError:
             # assume integer
-            imdbid = "tt{0:0>7}".format(imdbid)
+            imdbid = f"tt{imdbid:0>7}"
         if locale is None:
             locale = get_locale()
         movie = cls(imdbid, locale=locale)
@@ -600,23 +606,21 @@ class Movie(Element):
     votes = Datapoint('vote_count')
 
     adult = Datapoint('adult')
-    collection = Datapoint('belongs_to_collection', handler=lambda x: \
-                                                        Collection(raw=x))
+    collection = Datapoint('belongs_to_collection',
+                           handler=lambda x: Collection(raw=x))
     genres = Datalist('genres', handler=Genre)
     studios = Datalist('production_companies', handler=Studio)
     countries = Datalist('production_countries', handler=Country)
     languages = Datalist('spoken_languages', handler=Language)
 
     def _populate(self):
-        return Request('movie/{0}'.format(self.id), \
-                       language=self._locale.language)
+        return Request(f'movie/{self.id}', language=self._locale.language)
 
     def _populate_titles(self):
         kwargs = {}
         if not self._locale.fallthrough:
             kwargs['country'] = self._locale.country
-        return Request('movie/{0}/alternative_titles'.format(self.id),
-                       **kwargs)
+        return Request(f'movie/{self.id}/alternative_titles', **kwargs)
 
     def _populate_cast(self):
         return Request('movie/{0}/casts'.format(self.id))
@@ -625,22 +629,22 @@ class Movie(Element):
         kwargs = {}
         if not self._locale.fallthrough:
             kwargs['language'] = self._locale.language
-        return Request('movie/{0}/images'.format(self.id), **kwargs)
+        return Request(f'movie/{self.id}/images', **kwargs)
 
     def _populate_keywords(self):
-        return Request('movie/{0}/keywords'.format(self.id))
+        return Request(f'movie/{self.id}/keywords')
 
     def _populate_releases(self):
-        return Request('movie/{0}/releases'.format(self.id))
+        return Request(f'movie/{self.id}/releases')
 
     def _populate_trailers(self):
-        return Request('movie/{0}/trailers'.format(self.id),
-                            language=self._locale.language)
+        return Request(f'movie/{self.id}/trailers',
+                       language=self._locale.language)
 
     def _populate_translations(self):
-        return Request('movie/{0}/translations'.format(self.id))
+        return Request(f'movie/{self.id}/translations')
 
-    alternate_titles = Datalist('titles', handler=AlternateTitle, \
+    alternate_titles = Datalist('titles', handler=AlternateTitle,
                                 poller=_populate_titles, sort=True)
 
     # FIXME: this data point will need to be changed to 'credits' at some point
@@ -675,16 +679,16 @@ class Movie(Element):
     def setRating(self, value):
         if not (0 <= value <= 10):
             raise TMDBError("Ratings must be between '0' and '10'.")
-        req = Request('movie/{0}/rating'.format(self.id),
+        req = Request(f'movie/{self.id}/rating',
                       session_id=self._session.sessionid)
         req.lifetime = 0
-        req.add_data({'value':value})
+        req.add_data({'value': value})
         req.readJSON()
 
     def setWatchlist(self, value):
-        req = Request('account/{0}/movie_watchlist'.format(
-                        Account(session=self._session).id),
-                      session_id=self._session.sessionid)
+        req = Request(
+            f'account/{Account(session=self._session).id}/movie_watchlist',
+            session_id=self._session.sessionid)
         req.lifetime = 0
         req.add_data({'movie_id': self.id,
                       'movie_watchlist': str(bool(value)).lower()})
@@ -695,74 +699,73 @@ class Movie(Element):
 
     @property
     def similar(self):
-        res = MovieSearchResult(Request(
-                                 'movie/{0}/similar_movies'.format(self.id)),
-                                 locale=self._locale)
-        res._name = u'Similar to {0}'.format(self._printable_name())
+        res = MovieSearchResult(Request(f'movie/{self.id}/similar_movies'),
+                                locale=self._locale)
+        res._name = f'Similar to {self._printable_name()}'
         return res
 
     @property
     def lists(self):
-        res = ListSearchResult(Request('movie/{0}/lists'.format(self.id)))
+        res = ListSearchResult(Request(f'movie/{self.id}/lists'))
         res._name = "Lists containing {0}".format(self._printable_name())
         return res
 
     def _printable_name(self):
         if self.title is not None:
-            s = u"'{0}'".format(self.title)
+            s = f"'{self.title}'"
         elif self.originaltitle is not None:
-            s = u"'{0}'".format(self.originaltitle)
+            s = f"'{self.originaltitle}'"
         else:
-            s = u"'No Title'"
+            s = "'No Title'"
         if self.releasedate:
-            s = u"{0} ({1})".format(s, self.releasedate.year)
+            s = f"{s} ({self.releasedate.year})"
         return s
 
     def __repr__(self):
-        return u"<{0} {1}>".format(self.__class__.__name__,
-                                   self._printable_name()).encode('utf-8')
+        return f"<{self.__class__.__name__} {self._printable_name()}>"
 
 
 class ReverseCast( Movie ):
     character = Datapoint('character')
 
     def __repr__(self):
-        return (u"<{0.__class__.__name__} '{0.character}' on {1}>"
-                .format(self, self._printable_name()).encode('utf-8'))
+        return (f"<{self.__class__.__name__} '{self.character}' "
+                f"on {self._printable_name()}>")
 
 
-class ReverseCrew( Movie ):
+class ReverseCrew(Movie):
     department = Datapoint('department')
     job = Datapoint('job')
 
     def __repr__(self):
-        return (u"<{0.__class__.__name__} '{0.job}' for {1}>"
-                .format(self, self._printable_name()).encode('utf-8'))
+        return (f"<{self.__class__.__name__} '{self.job}' "
+                f"for {self._printable_name()}>")
 
 
 class Collection(NameRepr, Element):
     id = Datapoint('id', initarg=1)
     name = Datapoint('name')
-    backdrop = Datapoint('backdrop_path', handler=Backdrop, \
+    backdrop = Datapoint('backdrop_path', handler=Backdrop,
                          raw=False, default=None)
     poster = Datapoint('poster_path', handler=Poster, raw=False, default=None)
     members = Datalist('parts', handler=Movie)
     overview = Datapoint('overview')
 
     def _populate(self):
-        return Request('collection/{0}'.format(self.id),
+        return Request(f'collection/{self.id}',
                        language=self._locale.language)
 
     def _populate_images(self):
         kwargs = {}
         if not self._locale.fallthrough:
             kwargs['language'] = self._locale.language
-        return Request('collection/{0}/images'.format(self.id), **kwargs)
+        return Request(f'collection/{self.id}/images', **kwargs)
 
     backdrops = Datalist('backdrops', handler=Backdrop,
                          poller=_populate_images, sort=True)
     posters = Datalist('posters', handler=Poster,
                        poller=_populate_images, sort=True)
+
 
 class List(NameRepr, Element):
     id = Datapoint('id', initarg=1)
@@ -776,11 +779,13 @@ class List(NameRepr, Element):
     members = Datalist('items', handler=Movie)
 
     def _populate(self):
-        return Request('list/{0}'.format(self.id))
+        return Request(f'list/{self.id}')
 
-class Network(NameRepr,Element):
+
+class Network(NameRepr, Element):
     id = Datapoint('id', initarg=1)
     name = Datapoint('name')
+
 
 class Episode(NameRepr, Element):
     episode_number = Datapoint('episode_number', initarg=3)
@@ -796,36 +801,41 @@ class Episode(NameRepr, Element):
     still = Datapoint('still_path', handler=Backdrop, raw=False, default=None)
 
     def _populate(self):
-        return Request('tv/{0}/season/{1}/episode/{2}'.format(self.series_id, self.season_number, self.episode_number),
+        return Request(f'tv/{self.series_id}/'
+                       f'season/{self.season_number}/'
+                       f'episode/{self.episode_number}',
                        language=self._locale.language)
 
     def _populate_cast(self):
-        return Request('tv/{0}/season/{1}/episode/{2}/credits'.format(
-            self.series_id, self.season_number, self.episode_number),
+        return Request(f'tv/{self.series_id}/'
+                       f'season/{self.season_number}/'
+                       f'episode/{self.episode_number}/credits',
                        language=self._locale.language)
 
     def _populate_external_ids(self):
-        return Request('tv/{0}/season/{1}/episode/{2}/external_ids'.format(
-            self.series_id, self.season_number, self.episode_number))
+        return Request(f'tv/{self.series_id}/season/{self.season_number}/'
+                       f'episode/{self.episode_number}/external_ids')
 
     def _populate_images(self):
         kwargs = {}
         if not self._locale.fallthrough:
             kwargs['language'] = self._locale.language
-        return Request('tv/{0}/season/{1}/episode/{2}/images'.format(
-            self.series_id, self.season_number, self.episode_number), **kwargs)
+        return Request(f'tv/{self.series_id}/season/{self.season_number}/'
+                       f'episode/{self.episode_number}/images', **kwargs)
 
     cast = Datalist('cast', handler=Cast,
                     poller=_populate_cast, sort='order')
     guest_stars = Datalist('guest_stars', handler=Cast,
-                    poller=_populate_cast, sort='order')
+                           poller=_populate_cast, sort='order')
     crew = Datalist('crew', handler=Crew, poller=_populate_cast)
     imdb_id = Datapoint('imdb_id', poller=_populate_external_ids)
     freebase_id = Datapoint('freebase_id', poller=_populate_external_ids)
     freebase_mid = Datapoint('freebase_mid', poller=_populate_external_ids)
     tvdb_id = Datapoint('tvdb_id', poller=_populate_external_ids)
     tvrage_id = Datapoint('tvrage_id', poller=_populate_external_ids)
-    stills = Datalist('stills', handler=Backdrop, poller=_populate_images, sort=True)
+    stills = Datalist('stills', handler=Backdrop,
+                      poller=_populate_images, sort=True)
+
 
 class Season(NameRepr, Element):
     season_number = Datapoint('season_number', initarg=2)
@@ -836,20 +846,23 @@ class Season(NameRepr, Element):
     overview = Datapoint('overview')
     name = Datapoint('name')
     episodes = Datadict('episodes', attr='episode_number', handler=Episode,
-                        passthrough={'series_id': 'series_id', 'season_number': 'season_number'})
+                        passthrough={'series_id': 'series_id',
+                                     'season_number': 'season_number'})
 
     def _populate(self):
-        return Request('tv/{0}/season/{1}'.format(self.series_id, self.season_number),
+        return Request(f'tv/{self.series_id}/season/{self.season_number}',
                        language=self._locale.language)
 
     def _populate_images(self):
         kwargs = {}
         if not self._locale.fallthrough:
             kwargs['language'] = self._locale.language
-        return Request('tv/{0}/season/{1}/images'.format(self.series_id, self.season_number), **kwargs)
+        return Request(f'tv/{self.series_id}/'
+                       f'season/{self.season_number}/images', **kwargs)
 
     def _populate_external_ids(self):
-        return Request('tv/{0}/season/{1}/external_ids'.format(self.series_id, self.season_number))
+        return Request(
+            f'tv/{self.series_id}/season/{self.season_number}/external_ids')
 
     posters = Datalist('posters', handler=Poster,
                        poller=_populate_images, sort=True)
@@ -859,9 +872,11 @@ class Season(NameRepr, Element):
     tvdb_id = Datapoint('tvdb_id', poller=_populate_external_ids)
     tvrage_id = Datapoint('tvrage_id', poller=_populate_external_ids)
 
+
 class Series(NameRepr, Element):
     id = Datapoint('id', initarg=1)
-    backdrop = Datapoint('backdrop_path', handler=Backdrop, raw=False, default=None)
+    backdrop = Datapoint('backdrop_path', handler=Backdrop, raw=False,
+                         default=None)
     authors = Datalist('created_by', handler=Person)
     episode_run_times = Datalist('episode_run_time')
     first_air_date = Datapoint('first_air_date', handler=process_date)
@@ -882,26 +897,26 @@ class Series(NameRepr, Element):
     votes = Datapoint('vote_count')
     poster = Datapoint('poster_path', handler=Poster, raw=False, default=None)
     networks = Datalist('networks', handler=Network)
-    seasons = Datadict('seasons', attr='season_number', handler=Season, passthrough={'id': 'series_id'})
+    seasons = Datadict('seasons', attr='season_number', handler=Season,
+                       passthrough={'id': 'series_id'})
 
     def _populate(self):
-        return Request('tv/{0}'.format(self.id),
-                       language=self._locale.language)
+        return Request(f'tv/{self.id}', language=self._locale.language)
 
     def _populate_cast(self):
-        return Request('tv/{0}/credits'.format(self.id))
+        return Request(f'tv/{self.id}/credits')
 
     def _populate_images(self):
         kwargs = {}
         if not self._locale.fallthrough:
             kwargs['language'] = self._locale.language
-        return Request('tv/{0}/images'.format(self.id), **kwargs)
+        return Request(f'tv/{self.id}/images', **kwargs)
 
     def _populate_external_ids(self):
-        return Request('tv/{0}/external_ids'.format(self.id))
+        return Request(f'tv/{self.id}/external_ids')
 
     def _populate_keywords(self):
-        return Request('tv/{0}/keywords'.format(self.id))
+        return Request(f'tv/{self.id}/keywords')
 
     cast = Datalist('cast', handler=Cast,
                     poller=_populate_cast, sort='order')
@@ -911,7 +926,7 @@ class Series(NameRepr, Element):
     posters = Datalist('posters', handler=Poster,
                        poller=_populate_images, sort=True)
     keywords = Datalist('results', handler=Keyword,
-                    poller=_populate_keywords)
+                        poller=_populate_keywords)
 
     imdb_id = Datapoint('imdb_id', poller=_populate_external_ids)
     freebase_id = Datapoint('freebase_id', poller=_populate_external_ids)
@@ -924,8 +939,7 @@ class Series(NameRepr, Element):
 
     @property
     def similar(self):
-        res = SeriesSearchResult(Request(
-                                 'tv/{0}/similar'.format(self.id)),
+        res = SeriesSearchResult(Request(f'tv/{self.id}/similar'),
                                  locale=self._locale)
-        res._name = u'Similar to {0.name}'.format(self)
+        res._name = f'Similar to {self.name}'
         return res
