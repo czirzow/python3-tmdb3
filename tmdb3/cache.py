@@ -1,22 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#-----------------------
+# -----------------------
 # Name: cache.py
 # Python Library
 # Author: Raymond Wagner
 # Purpose: Caching framework to store TMDb API results
-#-----------------------
+# -----------------------
 
 import time
-import os
 
-from tmdb_exceptions import *
-from cache_engine import Engines
+from .tmdb_exceptions import *
+from .cache_engine import Engines
 
-import cache_null
-import cache_file
+from .cache_null import *
+from .cache_file import *
 
 DEBUG = False
+
 
 class Cache(object):
     """
@@ -49,7 +49,7 @@ class Cache(object):
                 self._age = max(self._age, obj.creation)
 
     def _expire(self):
-        for k, v in self._data.items():
+        for k, v in list(self._data.items()):
             if v.expired:
                 del self._data[k]
 
@@ -81,9 +81,9 @@ class Cache(object):
             # wait to ensure proper rate limiting
             if len(self._rate_limiter) == 30:
                 w = 10 - (time.time() - self._rate_limiter.pop(0))
-                if (w > 0):
+                if w > 0:
                     if DEBUG:
-                        print "rate limiting - waiting {0} seconds".format(w)
+                        print("rate limiting - waiting {0} seconds".format(w))
                     time.sleep(w)
             return None
 
@@ -94,7 +94,7 @@ class Cache(object):
         """
         return self.Cached(self, callback)
 
-    class Cached( object ):
+    class Cached(object):
         def __init__(self, cache, callback, func=None, inst=None):
             self.cache = cache
             self.callback = callback
