@@ -1,29 +1,28 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#-----------------------
+# -----------------------
 # Name: cache_file.py
 # Python Library
 # Author: Raymond Wagner
-# Purpose: Persistant file-backed cache using /tmp/ to share data
+# Purpose: Persistent file-backed cache using /tmp/ to share data
 #          using flock or msvcrt.locking to allow safe concurrent
 #          access.
-#-----------------------
+# -----------------------
 
 import struct
 import errno
 import json
-import time
 import os
 import io
 
-from cStringIO import StringIO
+from io import StringIO
 
-from tmdb_exceptions import *
-from cache_engine import CacheEngine, CacheObject
+from .tmdb_exceptions import *
+from .cache_engine import CacheEngine, CacheObject
 
 ####################
 # Cache File Format
-#------------------
+# -----------------
 # cache version         (2) unsigned short
 # slot count            (2) unsigned short
 # slot 0: timestamp     (8) double
@@ -37,7 +36,7 @@ from cache_engine import CacheEngine, CacheObject
 # slot N-2: timestamp       start of data for that entry. 256 empty slots
 # slot N-2: lifetime        are pre-allocated, allowing fast updates.
 # slot N-2: seek point      when all slots are filled, the cache file is
-# slot N-1: timestamp       rewritten from scrach to add more slots.
+# slot N-1: timestamp       rewritten from scratch to add more slots.
 # slot N-1: lifetime
 # slot N-1: seek point
 # block 1               (?) ASCII
@@ -53,8 +52,10 @@ from cache_engine import CacheEngine, CacheObject
 def _donothing(*args, **kwargs):
     pass
 
+
 try:
     import fcntl
+
     class Flock(object):
         """
         Context manager to flock file for the duration the object
@@ -96,7 +97,8 @@ try:
 
 except ImportError:
     import msvcrt
-    class Flock( object ):
+
+    class Flock(object):
         LOCK_EX = msvcrt.LK_LOCK
         LOCK_SH = msvcrt.LK_LOCK
 
@@ -123,8 +125,9 @@ except ImportError:
         if filename.startswith('~'):
             # check for home directory
             return os.path.expanduser(filename)
-        elif (ord(filename[0]) in (range(65, 91) + range(99, 123))) \
-                and (filename[1:3] == ':\\'):
+        elif (ord(filename[0]) in (
+                list(range(65, 91)) + list(range(99, 123)))) and (
+                filename[1:3] == ':\\'):
             # check for absolute drive path (e.g. C:\...)
             return filename
         elif (filename.count('\\') >= 3) and (filename.startswith('\\\\')):
@@ -136,7 +139,7 @@ except ImportError:
 
 class FileCacheObject(CacheObject):
     _struct = struct.Struct('dII')  # double and two ints
-                                    # timestamp, lifetime, position
+    #                               # timestamp, lifetime, position
 
     @classmethod
     def fromFile(cls, fd):
@@ -207,7 +210,7 @@ class FileCacheObject(CacheObject):
         fd.write(self._buff.getvalue())
 
 
-class FileEngine( CacheEngine ):
+class FileEngine(CacheEngine):
     """Simple file-backed engine."""
     name = 'file'
     _struct = struct.Struct('HH')  # two shorts for version and count
@@ -300,8 +303,8 @@ class FileEngine( CacheEngine ):
     def _read(self, date):
         try:
             self.cachefd.seek(0)
-            version, count = self._struct.unpack(\
-                                    self.cachefd.read(self._struct.size))
+            version, count = self._struct.unpack(
+                self.cachefd.read(self._struct.size))
             if version != self._version:
                 # old version, break out and well rewrite when finished
                 raise Exception
@@ -371,7 +374,7 @@ class FileEngine( CacheEngine ):
         else:
             # rewrite cache file from scratch
             # pull data from parent cache
-            data.extend(self.parent()._data.values())
+            data.extend(list(self.parent()._data.values()))
             data.sort(key=lambda x: x.creation)
             # write header
             size = len(data) + self.preallocate
