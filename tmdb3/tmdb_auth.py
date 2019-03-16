@@ -1,31 +1,40 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#-----------------------
+# -----------------------
 # Name: tmdb_auth.py
 # Python Library
 # Author: Raymond Wagner
 # Purpose: Provide authentication and session services for 
 #          calls against the TMDB v3 API
-#-----------------------
+# -----------------------
 
-from datetime import datetime as _pydatetime, \
-                     tzinfo as _pytzinfo
+from datetime import datetime as _pydatetime
+from datetime import tzinfo as _pytzinfo
+from datetime import timedelta
 import re
+
+from .request import Request
+from .tmdb_exceptions import *
+
+syssession = None
+
+
 class datetime(_pydatetime):
     """Customized datetime class with ISO format parsing."""
-    _reiso = re.compile('(?P<year>[0-9]{4})'
-                       '-(?P<month>[0-9]{1,2})'
-                       '-(?P<day>[0-9]{1,2})'
-                        '.'
-                        '(?P<hour>[0-9]{2})'
-                       ':(?P<min>[0-9]{2})'
-                       '(:(?P<sec>[0-9]{2}))?'
-                        '(?P<tz>Z|'
-                            '(?P<tzdirec>[-+])'
-                            '(?P<tzhour>[0-9]{1,2})'
-                            '(:)?'
-                            '(?P<tzmin>[0-9]{2})?'
-                        ')?')
+    _reiso = re.compile(
+        '(?P<year>[0-9]{4})'
+        '-(?P<month>[0-9]{1,2})'
+        '-(?P<day>[0-9]{1,2})'
+        '.'
+        '(?P<hour>[0-9]{2})'
+        ':(?P<min>[0-9]{2})'
+        '(:(?P<sec>[0-9]{2}))?'
+        '(?P<tz>Z|'
+        '(?P<tzdirec>[-+])'
+        '(?P<tzhour>[0-9]{1,2})'
+        '(:)?'
+        '(?P<tzmin>[0-9]{2})?'
+        ')?')
 
     class _tzinfo(_pytzinfo):
         def __init__(self, direc='+', hr=0, min=0):
@@ -64,11 +73,6 @@ class datetime(_pydatetime):
             dt.append(0)
             dt.append(tz)
         return cls(*dt)
-
-from request import Request
-from tmdb_exceptions import *
-
-syssession = None
 
 
 def set_session(sessionid):
@@ -135,4 +139,4 @@ class Session(object):
 
     @property
     def callbackurl(self):
-        return "http://www.themoviedb.org/authenticate/"+self._authtoken
+        return "http://www.themoviedb.org/authenticate/" + self._authtoken
