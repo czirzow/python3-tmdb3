@@ -204,7 +204,9 @@ class FileCacheObject(CacheObject):
 
     def dumpslot(self, fd):
         pos = fd.tell()
-        fd.write(self._struct.pack(self.creation, self.lifetime, self.position))
+        fd.write(
+            self._struct.pack(self.creation, self.lifetime, self.position)
+        )
 
     def dumpdata(self, fd):
         self.size
