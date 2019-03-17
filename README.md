@@ -2,7 +2,7 @@ PYTHON3-TMDB3
 =============
 
 [![Build Status](https://travis-ci.com/opacam/python3-tmdb3.svg?branch=master)](https://travis-ci.com/opacam/python3-tmdb3)
-[![Coverage Status](https://coveralls.io/repos/github/opacam/python3-tmdb3/badge.svg?branch=master)](https://coveralls.io/github/opacam/python3-tmdb3?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/opacam/python3-tmdb3/badge.svg?branch=master&kill_cache=1)](https://coveralls.io/github/opacam/python3-tmdb3?branch=master)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/opacam/python3-tmdb3/issues)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
