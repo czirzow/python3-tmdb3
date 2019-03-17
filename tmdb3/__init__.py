@@ -40,7 +40,7 @@ for search and retrieval of text metadata and image URLs from TMDB.
 Preliminary API specifications can be found at
 http://help.themoviedb.org/kb/api/about-3"""
 
-__version__ = "v0.7.2"
+__version__ = "0.8.0"
 
 __classifiers__ = [
     "Development Status :: 5 - Production/Stable",
