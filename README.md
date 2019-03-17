@@ -1,18 +1,19 @@
-PyTMDB3
-=======
+PYTHON3-TMDB3
+=============
 
-This Python module implements the v3 API for TheMovieDb.org, allowing access
-to movie and cast information, as well as related artwork. More information
-can be found at:
+This Python3 module implements the v3 API for
+[TheMovieDb.org](<https://www.themoviedb.org/>) , allowing access to movie,
+tvshow, cast information, as well as related artwork. More information can be
+found at:
 
-http://help.themoviedb.org/kb/api/about-3
+  - [Documentation for TheMovieDb's api](https://www.themoviedb.org/documentation/api)
 
 Initial Access
 --------------
 
 Access to the API requires a personal key. You can create one by signing up
 for an account on TheMovieDb.org, and generating one from your Account Details
-page. Once done, the PyTMDB3 module must be be given this key as follows:
+page. Once done, the python3-tmdb3 module must be be given this key as follows:
 
     >>> from tmdb3 import set_key
     >>> set_key('your_api_key')
@@ -20,7 +21,7 @@ page. Once done, the PyTMDB3 module must be be given this key as follows:
 Caching Engine
 --------------
 
-In order to limit excessive usage against the online API server, the PyTMDB3
+In order to limit excessive usage against the online API server, the python3-tmdb3
 module supports caching of requests. Cached data is keyed off the request URL,
 and is currently stored for one hour. API requests are limited to thirty (30)
 within ten (10) seconds. Requests beyond this limit are blocking until they
@@ -45,10 +46,10 @@ the defaults for any fields that did not have language-specific values. The
 v3 API no longer performs this fall through, leaving it up to clients to
 optionally implement it on their own.
 
-The PyTMDB3 module supports the use of locales in two separate manners. One
-can define a global locale that is automatically used if not specified
+The python3-tmdb3 module supports the use of locales in two separate manners.
+One can define a global locale that is automatically used if not specified
 otherwise, or a specific locale can be supplied directly to searches and
-data queries using the `locale=` keyword argument, which is then propogated
+data queries using the `locale=` keyword argument, which is then propagated
 through any subsequent queries made through those objects.
 
 Locale settings are controlled through two functions
@@ -89,8 +90,8 @@ Searching
 There are currently six search methods available for use: `movies`, `people`, 
 `studios`, `lists`, `collections`, and `series`. Search results from TheMovieDb
 are sent iteratively, twenty results per page. The search methods provided by
-the PyTMDB3 module return list-like structures that will automatically grab
-new pages as needed.
+the python3-tmdb3 module return list-like structures that will automatically
+grab new pages as needed.
 
     >>> from tmdb3 import searchMovie
     >>> res = searchMovie('A New Hope')
@@ -157,7 +158,7 @@ Image Behavior
 TheMovieDb currently offers three types of artwork: backdrops, posters, and
 profiles. The three data queries above will each carry a default one of these
 and potentially a list of additionals to choose from. Each can be downloaded
-directly, or at one of several pre-scaled reduced resolutions. The PyTMDB3
+directly, or at one of several pre-scaled reduced resolutions. The python3-tmdb3
 module provides a list of available sizes, and will generate a URL to download
 a requested size. Invalid sizes return an error.
 

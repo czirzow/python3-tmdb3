@@ -1,0 +1,45 @@
+{
+    "page": 1,
+    "total_results": 2,
+    "total_pages": 1,
+    "results": [
+        {
+            "vote_count": 10980,
+            "id": 11,
+            "video": false,
+            "vote_average": 8.2,
+            "title": "Star Wars",
+            "popularity": 41.198,
+            "poster_path": "/btTdmkgIvOi0FFip1sPuZI2oQG6.jpg",
+            "original_language": "en",
+            "original_title": "Star Wars",
+            "genre_ids": [
+                12,
+                28,
+                878
+            ],
+            "backdrop_path": "/4iJfYYoQzZcONB9hNzg0J0wWyPH.jpg",
+            "adult": false,
+            "overview": "Princess Leia is captured and held hostage by the evil Imperial forces in their effort to take over the galactic Empire. Venturesome Luke Skywalker and dashing captain Han Solo team together with the loveable robot duo R2-D2 and C-3PO to rescue the beautiful princess and restore peace and justice in the Empire.",
+            "release_date": "1977-05-25"
+        },
+        {
+            "vote_count": 21,
+            "id": 72694,
+            "video": false,
+            "vote_average": 7.2,
+            "title": "The Making of 'Star Wars'",
+            "popularity": 1.961,
+            "poster_path": "/WgsInarGqxj5a33H1oO1IJACDU.jpg",
+            "original_language": "en",
+            "original_title": "The Making of 'Star Wars'",
+            "genre_ids": [
+                99
+            ],
+            "backdrop_path": "/oxWdpHHrdGaB3ZK4JpBnEQ8msrp.jpg",
+            "adult": false,
+            "overview": "Ever wonder how they ever managed to make a movie like Star Wars? Well, bickering droid duo C-3PO and R2-D2 host this tour of the mind of creator George Lucas and what inspired him to make the movie. Even interviewed are the cast and crew, even features scenes of when C-3PO, R2-D2, and Darth Vader planted their footprints (or in R2's case, tread-prints) into cement. Also discussed is Star Wars mania, how fans loved the movie, collected the merchandise and danced the disco music. Also shown are behind-the-scenes looks at the movie, as well as how difficult each effect was in doing since they didn't have the convenience of computer animation back then.",
+            "release_date": "1977-09-16"
+        }
+    ]
+}

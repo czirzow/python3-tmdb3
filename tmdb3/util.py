@@ -1,21 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#-----------------------
+# -----------------------
 # Name: util.py    Assorted utilities used in tmdb_api
 # Python Library
 # Author: Raymond Wagner
-#-----------------------
+# -----------------------
 
 from copy import copy
-from locales import get_locale
-from tmdb_auth import get_session
+from .locales import get_locale
+from .tmdb_auth import get_session
 
 
 class NameRepr(object):
     """Mixin for __repr__ methods using 'name' attribute."""
+
     def __repr__(self):
-        return u"<{0.__class__.__name__} '{0.name}'>"\
-                    .format(self).encode('utf-8')
+        return f"<{self.__class__.__name__} '{self.name}'>"
 
 
 class SearchRepr(object):
@@ -23,9 +23,10 @@ class SearchRepr(object):
     Mixin for __repr__ methods for classes with '_name' and
     '_request' attributes.
     """
+
     def __repr__(self):
-        name = self._name if self._name else self._request._kwargs['query']
-        return u"<Search Results: {0}>".format(name).encode('utf-8')
+        name = self._name if self._name else self._request._kwargs["query"]
+        return f"<Search Results: {name}>"
 
 
 class Poller(object):
@@ -33,6 +34,7 @@ class Poller(object):
     Wrapper for an optional callable to populate an Element derived
     class with raw data, or data from a Request.
     """
+
     def __init__(self, func, lookup, inst=None):
         self.func = func
         self.lookup = lookup
@@ -45,7 +47,7 @@ class Poller(object):
         else:
             # without function, this is just a dummy poller used for applying
             # raw data to a new Element class with the lookup table
-            self.__name__ = '_populate'
+            self.__name__ = "_populate"
 
     def __get__(self, inst, owner):
         # normal decorator stuff
@@ -61,10 +63,13 @@ class Poller(object):
     def __call__(self):
         # retrieve data from callable function, and apply
         if not callable(self.func):
-            raise RuntimeError('Poller object called without a source function')
+            raise RuntimeError("Poller object called without a source function")
         req = self.func()
-        if ('language' in req._kwargs) or ('country' in req._kwargs) \
-                and self.inst._locale.fallthrough:
+        if (
+            ("language" in req._kwargs)
+            or ("country" in req._kwargs)
+            and self.inst._locale.fallthrough
+        ):
             # request specifies a locale filter, and fallthrough is enabled
             # run a first pass with specified filter
             if not self.apply(req.readJSON(), False):
@@ -74,7 +79,7 @@ class Poller(object):
             self.apply(req.new(language=None, country=None).readJSON())
             # re-apply the filtered first pass data over top the second
             # unfiltered set. this is to work around the issue that the
-            # properties have no way of knowing when they should or 
+            # properties have no way of knowing when they should or
             # should not overwrite existing data. the cache engine will
             # take care of the duplicate query
         self.apply(req.readJSON())
@@ -82,7 +87,7 @@ class Poller(object):
     def apply(self, data, set_nones=True):
         # apply data directly, bypassing callable function
         unfilled = False
-        for k, v in self.lookup.items():
+        for k, v in list(self.lookup.items()):
             if (k in data) and (not callable(self.func) or data[k] is not None):
                 # argument received data, populate it
                 setattr(self.inst, v, data[k])
@@ -108,8 +113,18 @@ class Data(object):
     Basic response definition class
     This maps to a single key in a JSON dictionary received from the API
     """
-    def __init__(self, field, initarg=None, handler=None, poller=None,
-                 raw=True, default=u'', lang=None, passthrough={}):
+
+    def __init__(
+        self,
+        field,
+        initarg=None,
+        handler=None,
+        poller=None,
+        raw=True,
+        default="",
+        lang=None,
+        passthrough=None,
+    ):
         """
         This defines how the dictionary value is to be processed by the
         poller
@@ -141,7 +156,7 @@ class Data(object):
         self.raw = raw
         self.default = default
         self.sethandler(handler)
-        self.passthrough = passthrough
+        self.passthrough = passthrough or {}
 
     def __get__(self, inst, owner):
         if inst is None:
@@ -153,7 +168,7 @@ class Data(object):
         return inst._data[self.field]
 
     def __set__(self, inst, value):
-        if (value is not None) and (value != ''):
+        if (value is not None) and (value != ""):
             value = self.handler(value)
         else:
             value = self.default
@@ -184,7 +199,16 @@ class Datalist(Data):
     Response definition class for list data
     This maps to a key in a JSON dictionary storing a list of data
     """
-    def __init__(self, field, handler=None, poller=None, sort=None, raw=True, passthrough={}):
+
+    def __init__(
+        self,
+        field,
+        handler=None,
+        poller=None,
+        sort=None,
+        raw=True,
+        passthrough=None,
+    ):
         """
         This defines how the dictionary value is to be processed by the
         poller
@@ -209,7 +233,9 @@ class Datalist(Data):
                        force the data to instead be passed in as the first
                        argument
         """
-        super(Datalist, self).__init__(field, None, handler, poller, raw, passthrough=passthrough)
+        super(Datalist, self).__init__(
+            field, None, handler, poller, raw, passthrough=passthrough or {}
+        )
         self.sort = sort
 
     def __set__(self, inst, value):
@@ -221,7 +247,7 @@ class Datalist(Data):
                     val._locale = inst._locale
                     val._session = inst._session
 
-                    for source, dest in self.passthrough.items():
+                    for source, dest in list(self.passthrough.items()):
                         setattr(val, dest, getattr(inst, source))
 
                 data.append(val)
@@ -238,8 +264,17 @@ class Datadict(Data):
     Response definition class for dictionary data
     This maps to a key in a JSON dictionary storing a dictionary of data
     """
-    def __init__(self, field, handler=None, poller=None, raw=True,
-                       key=None, attr=None, passthrough={}):
+
+    def __init__(
+        self,
+        field,
+        handler=None,
+        poller=None,
+        raw=True,
+        key=None,
+        attr=None,
+        passthrough=None,
+    ):
         """
         This defines how the dictionary value is to be processed by the
         poller
@@ -269,14 +304,18 @@ class Datadict(Data):
         """
         if key and attr:
             raise TypeError("`key` and `attr` cannot both be defined")
-        super(Datadict, self).__init__(field, None, handler, poller, raw, passthrough=passthrough)
+        super(Datadict, self).__init__(
+            field, None, handler, poller, raw, passthrough=passthrough or {}
+        )
         if key:
             self.getkey = lambda x: x[key]
         elif attr:
             self.getkey = lambda x: getattr(x, attr)
         else:
-            raise TypeError("Datadict requires `key` or `attr` be defined " +
-                            "for populating the dictionary")
+            raise TypeError(
+                "Datadict requires `key` or `attr` be defined "
+                "for populating the dictionary"
+            )
 
     def __set__(self, inst, value):
         data = {}
@@ -287,17 +326,19 @@ class Datadict(Data):
                     val._locale = inst._locale
                     val._session = inst._session
 
-                    for source, dest in self.passthrough.items():
+                    for source, dest in list(self.passthrough.items()):
                         setattr(val, dest, getattr(inst, source))
 
                 data[self.getkey(val)] = val
         inst._data[self.field] = data
 
-class ElementType( type ):
+
+class ElementType(type):
     """
     MetaClass used to pre-process Element-derived classes and set up the
     Data definitions
     """
+
     def __new__(mcs, name, bases, attrs):
         # any Data or Poller object defined in parent classes must be cloned
         # and processed in this class to function properly
@@ -305,11 +346,11 @@ class ElementType( type ):
         # a copy into this class's attributes
         # run in reverse order so higher priority values overwrite lower ones
         data = {}
-        pollers = {'_populate':None}
+        pollers = {"_populate": None}
 
         for base in reversed(bases):
             if isinstance(base, mcs):
-                for k, attr in base.__dict__.items():
+                for k, attr in list(base.__dict__.items()):
                     if isinstance(attr, Data):
                         # extract copies of each defined Data element from
                         # parent classes
@@ -320,18 +361,18 @@ class ElementType( type ):
                         # extract copies of each defined Poller function
                         # from parent classes
                         pollers[k] = attr.func
-        for k, attr in attrs.items():
+        for k, attr in list(attrs.items()):
             if isinstance(attr, Data):
                 data[k] = attr
-        if '_populate' in attrs:
-            pollers['_populate'] = attrs['_populate']
+        if "_populate" in attrs:
+            pollers["_populate"] = attrs["_populate"]
 
-        # process all defined Data attribues, testing for use as an initial
+        # process all defined Data attributes, testing for use as an initial
         # argument, and building a list of what Pollers are used to populate
         # which Data points
         pollermap = dict([(k, []) for k in pollers])
         initargs = []
-        for k, v in data.items():
+        for k, v in list(data.items()):
             v.name = k
             if v.initarg:
                 initargs.append(v)
@@ -343,11 +384,11 @@ class ElementType( type ):
                     pollers[pn] = v.poller
                 pollermap[pn].append(v)
             else:
-                pollermap['_populate'].append(v)
+                pollermap["_populate"].append(v)
 
         # wrap each used poller function with a Poller class, and push into
         # the new class attributes
-        for k, v in pollermap.items():
+        for k, v in list(pollermap.items()):
             if len(v) == 0:
                 continue
             lookup = dict([(attr.field, attr.name) for attr in v])
@@ -359,37 +400,41 @@ class ElementType( type ):
                 attr.poller = poller
                 attrs[attr.name] = attr
 
-        # build sorted list of arguments used for intialization
-        attrs['_InitArgs'] = tuple(
-                [a.name for a in sorted(initargs, key=lambda x: x.initarg)])
+        # build sorted list of arguments used for initialization
+        attrs["_InitArgs"] = tuple(
+            [a.name for a in sorted(initargs, key=lambda x: x.initarg)]
+        )
         return type.__new__(mcs, name, bases, attrs)
 
     def __call__(cls, *args, **kwargs):
         obj = cls.__new__(cls)
-        if ('locale' in kwargs) and (kwargs['locale'] is not None):
-            obj._locale = kwargs['locale']
+        if ("locale" in kwargs) and (kwargs["locale"] is not None):
+            obj._locale = kwargs["locale"]
         else:
             obj._locale = get_locale()
 
-        if 'session' in kwargs:
-            obj._session = kwargs['session']
+        if "session" in kwargs:
+            obj._session = kwargs["session"]
         else:
             obj._session = get_session()
 
         obj._data = {}
-        if 'raw' in kwargs:
+        if "raw" in kwargs:
             # if 'raw' keyword is supplied, create populate object manually
             if len(args) != 0:
                 raise TypeError(
-                        '__init__() takes exactly 2 arguments (1 given)')
-            obj._populate.apply(kwargs['raw'], False)
+                    "__init__() takes exactly 2 arguments (1 given)"
+                )
+            obj._populate.apply(kwargs["raw"], False)
         else:
             # if not, the number of input arguments must exactly match that
             # defined by the Data definitions
             if len(args) != len(cls._InitArgs):
                 raise TypeError(
-                        '__init__() takes exactly {0} arguments ({1} given)'\
-                            .format(len(cls._InitArgs)+1, len(args)+1))
+                    f"__init__() takes exactly "
+                    f"{len(cls._InitArgs) + 1} "
+                    f"arguments ({len(args) + 1} given)"
+                )
             for a, v in zip(cls._InitArgs, args):
                 setattr(obj, a, v)
 
@@ -397,6 +442,5 @@ class ElementType( type ):
         return obj
 
 
-class Element( object ):
-    __metaclass__ = ElementType
-    _lang = 'en'
+class Element(object, metaclass=ElementType):
+    _lang = "en"

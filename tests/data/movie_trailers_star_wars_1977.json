@@ -1,0 +1,24 @@
+{
+    "id": 11,
+    "quicktime": [],
+    "youtube": [
+        {
+            "name": "Star Wars Episode IV: A New Hope - Trailer",
+            "size": "HD",
+            "source": "vZ734NWnAHA",
+            "type": "Trailer"
+        },
+        {
+            "name": "Star Wars: Teaser Trailer",
+            "size": "HD",
+            "source": "i-vsILeJ8_8",
+            "type": "Trailer"
+        },
+        {
+            "name": "STAR WARS Original Trailer (Restored) - 1976",
+            "size": "HD",
+            "source": "XHk5kCIiGoM",
+            "type": "Trailer"
+        }
+    ]
+}

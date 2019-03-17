@@ -1,0 +1,419 @@
+{
+    "page": 1,
+    "results": [
+        {
+            "original_name": "Star Wars Rebels",
+            "id": 60554,
+            "name": "Star Wars Rebels",
+            "vote_count": 157,
+            "vote_average": 7.1,
+            "first_air_date": "2014-10-13",
+            "poster_path": "/dfzbkhKMnkdwiG1AAIJnrc9SDdY.jpg",
+            "genre_ids": [
+                16,
+                10759
+            ],
+            "original_language": "en",
+            "backdrop_path": "/2haokMQ2dFQK2z1R9gZrH9qAeqk.jpg",
+            "overview": "Set between the events of Star Wars: Episodes III and IV, the story unfolds during a dark time when the evil Galactic Empire is tightening its grip of power on the galaxy. Imperial forces have occupied a remote planet and are ruining the lives of its people. The motley but clever crew of the starship Ghost \u2014 cowboy Jedi Kanan, ace pilot Hera, street-smart teenager Ezra, the \u201cmuscle\u201d Zeb, warrior firebrand Sabine, and cantankerous old astromech droid Chopper \u2014 is among a select few who are brave enough to stand against the Empire. Together, they will face threatening new villains, encounter colorful adversaries, embark on thrilling adventures, and become heroes with the power to ignite a rebellion.",
+            "origin_country": [
+                "US"
+            ],
+            "popularity": 25.112
+        },
+        {
+            "original_name": "Star Wars Resistance",
+            "id": 79093,
+            "name": "Star Wars Resistance",
+            "vote_count": 5,
+            "vote_average": 6.8,
+            "first_air_date": "2018-10-07",
+            "poster_path": "/hHPbh6mJkpxGREMKgJ9FpZNlxPd.jpg",
+            "genre_ids": [
+                16,
+                10759,
+                10765
+            ],
+            "original_language": "en",
+            "backdrop_path": "/4y3J0MN84Ylqy5Vc4cwE6Zdga99.jpg",
+            "overview": "Kazuda Xiono, a young pilot for the Resistance, is tasked with a top secret mission to investigate the First Order, a growing threat in the galaxy.",
+            "origin_country": [
+                "US"
+            ],
+            "popularity": 14.543
+        },
+        {
+            "original_name": "The Mandalorian",
+            "id": 82856,
+            "name": "The Mandalorian",
+            "vote_count": 0,
+            "vote_average": 0.0,
+            "first_air_date": "2019-12-31",
+            "poster_path": "/bPINv696C7wSADlvFfjyppL7NGj.jpg",
+            "genre_ids": [
+                10759,
+                10765
+            ],
+            "original_language": "en",
+            "backdrop_path": "/wxVtatnNDJtWRavoWIH7ykHfp4w.jpg",
+            "overview": "Set after the fall of the Empire and before the emergence of the First Order, we follow the travails of a lone gunfighter in the outer reaches of the galaxy far from the authority of the New Republic.",
+            "origin_country": [
+                "US"
+            ],
+            "popularity": 1.662
+        },
+        {
+            "original_name": "Battlestar Galactica",
+            "id": 1972,
+            "name": "Battlestar Galactica",
+            "vote_count": 595,
+            "vote_average": 8.2,
+            "first_air_date": "2004-10-18",
+            "poster_path": "/kPCJiwQHA4KenTybRbDPIRBlQls.jpg",
+            "genre_ids": [
+                18,
+                10759,
+                10765
+            ],
+            "original_language": "en",
+            "backdrop_path": "/jUPkQdETILcxIW2xSNEzAxUeHgR.jpg",
+            "overview": "When an old enemy, the Cylons, resurface and obliterate the 12 colonies, the crew of the aged Galactica protect a small civilian fleet - the last of humanity - as they journey toward the fabled 13th colony, Earth.",
+            "origin_country": [
+                "US",
+                "CA",
+                "GB"
+            ],
+            "popularity": 27.373
+        },
+        {
+            "original_name": "Star Trek: Voyager",
+            "id": 1855,
+            "name": "Star Trek: Voyager",
+            "vote_count": 344,
+            "vote_average": 7.8,
+            "first_air_date": "1995-01-16",
+            "poster_path": "/msYAJySH9GlwFva4rI32i600I2Y.jpg",
+            "genre_ids": [
+                18,
+                10759,
+                10765
+            ],
+            "original_language": "en",
+            "backdrop_path": "/yRsjaKfBHXtxbAWRLH7P7cWh68.jpg",
+            "overview": "Pulled to the far side of the galaxy, where the Federation is 75 years away at maximum warp speed, a Starfleet ship must cooperate with Maquis rebels to find a way home.",
+            "origin_country": [
+                "US"
+            ],
+            "popularity": 30.111
+        },
+        {
+            "original_name": "Star Trek: Discovery",
+            "id": 67198,
+            "name": "Star Trek: Discovery",
+            "vote_count": 514,
+            "vote_average": 6.9,
+            "first_air_date": "2017-09-24",
+            "poster_path": "/aJTSeqG43514TewIuS9hiHvbero.jpg",
+            "genre_ids": [
+                10765
+            ],
+            "original_language": "en",
+            "backdrop_path": "/rhE2h8WYJOPuBlMl20MQRnJw3aq.jpg",
+            "overview": "Follow the voyages of Starfleet on their missions to discover new worlds and new life forms, and one Starfleet officer who must learn that to truly understand all things alien, you must first understand yourself.",
+            "origin_country": [
+                "US"
+            ],
+            "popularity": 105.751
+        },
+        {
+            "original_name": "The Expanse",
+            "id": 63639,
+            "name": "The Expanse",
+            "vote_count": 678,
+            "vote_average": 7.6,
+            "first_air_date": "2015-12-14",
+            "poster_path": "/prJFWxJ0x8tBPTliMjj51wgYnSK.jpg",
+            "genre_ids": [
+                18,
+                9648,
+                10765
+            ],
+            "original_language": "en",
+            "backdrop_path": "/beIjmWr3OBOtcWK4tKMObOIDJ1C.jpg",
+            "overview": "A thriller set two hundred years in the future following the case of a missing young woman who brings a hardened detective and a rogue ship's captain together in a race across the solar system to expose the greatest conspiracy in human history.",
+            "origin_country": [
+                "US"
+            ],
+            "popularity": 36.117
+        },
+        {
+            "original_name": "Star Trek: Deep Space Nine",
+            "id": 580,
+            "name": "Star Trek: Deep Space Nine",
+            "vote_count": 278,
+            "vote_average": 7.9,
+            "first_air_date": "1993-01-03",
+            "poster_path": "/amrjHOaXxkeVgSrVS0CVmqb3xhR.jpg",
+            "genre_ids": [
+                18,
+                10759,
+                10765
+            ],
+            "original_language": "en",
+            "backdrop_path": "/jB3Ksk1tvhksdTa0xvI7l4LFHsy.jpg",
+            "overview": "Star Trek: Deep Space Nine is a science fiction television series set in the Star Trek universe.\n\nThe show is set in the Milky Way galaxy, in the years 2369 - 2375. Unlike the other Star Trek TV shows, it takes place on a space station instead of a starship, so as not to have two series with starships at the same time. This made continuing story arcs and the appearance of recurring characters much more feasible. The show is noted for its well-developed characters and its original, complex plots. The series depended on darker themes, less physical exploration of space, and an emphasis on many aspects of war.\n\nDS9 premiered in 1993 and ran for seven seasons, ending in 1999. Rooted in Gene Roddenberry\u2019s Star Trek universe, it was the first Trek spin-off created without direct involvement from Roddenberry, although he did give his blessing to the concept shortly before his death in 1991. The series was created by Rick Berman and Michael Piller, at the request of Brandon Tartikoff, and produced by Paramount Television. Key writers, in addition to Berman and Piller, included showrunner Ira Steven Behr, Robert Hewitt Wolfe, Ronald D. Moore, Peter Allan Fields, Bradley Thompson, David Weddle, Hans Beimler, and Ren\u00e9 Echevarria.",
+            "origin_country": [
+                "US"
+            ],
+            "popularity": 22.593
+        },
+        {
+            "original_name": "Babylon 5",
+            "id": 3137,
+            "name": "Babylon 5",
+            "vote_count": 191,
+            "vote_average": 8.1,
+            "first_air_date": "1994-01-26",
+            "poster_path": "/rj87TqwabgJzslrH4G6BCDseBKV.jpg",
+            "genre_ids": [
+                18,
+                10765
+            ],
+            "original_language": "en",
+            "backdrop_path": "/tlUm8yZSfUgLuzDipwP8LOpc0fe.jpg",
+            "overview": "Babylon 5 is a five-mile long space station located in neutral space. Built by the Earth Alliance in the 2250s, it's goal is to maintain peace among the various alien races by providing a sanctuary where grievances and negotiations can be worked out among duly appointed ambassadors. A council made up of representatives from the five major space-faring civilizations - the Earth Alliance, Minbari Federation, Centauri Republic, Narn Regime, and Vorlon Empire - work with the League of Non-Aligned Worlds to keep interstellar relations under control. Aside from its diplomatic function, Babylon 5 also serves as a military post for Earth and a port of call for travelers, traders, businessmen, criminals, and Rangers.",
+            "origin_country": [
+                "US"
+            ],
+            "popularity": 16.078
+        },
+        {
+            "original_name": "Star Trek",
+            "id": 253,
+            "name": "Star Trek",
+            "vote_count": 472,
+            "vote_average": 8.1,
+            "first_air_date": "1966-09-08",
+            "poster_path": "/3ATqzWYDbWOV2RBLWNwA43InT60.jpg",
+            "genre_ids": [
+                18,
+                10765
+            ],
+            "original_language": "en",
+            "backdrop_path": "/d0JLR2ostmBfHecj2omBCjspVW2.jpg",
+            "overview": "Space. The Final Frontier. The U.S.S. Enterprise embarks on a five year mission to explore the galaxy. The Enterprise is under the command of Captain James T. Kirk with First Officer Mr. Spock, from the planet Vulcan. With a determined crew, the Enterprise encounters Klingons, Romulans, time paradoxes, tribbles and genetic supermen lead by Khan Noonian Singh. Their mission is to explore strange new worlds, to seek new life and new civilizations, and to boldly go where no man has gone before.",
+            "origin_country": [
+                "US"
+            ],
+            "popularity": 32.401
+        },
+        {
+            "original_name": "Star Trek: Enterprise",
+            "id": 314,
+            "name": "Star Trek: Enterprise",
+            "vote_count": 281,
+            "vote_average": 7.5,
+            "first_air_date": "2001-09-26",
+            "poster_path": "/3msta8aYp2309onnFkVXeohbN4w.jpg",
+            "genre_ids": [
+                18,
+                10759,
+                10765
+            ],
+            "original_language": "en",
+            "backdrop_path": "/ibjUCp1dFK7kmMUcXrb1vW8PfHc.jpg",
+            "overview": "Star Trek: Enterprise is a science fiction TV series and a prequel to the original Star Trek set 100 years before. The series premiered September 26, 2001 on the UPN television network with the final episode airing on May 13, 2005.\n\nThe series takes place in the 22nd century aboard Earth's first warp 5 capable starship Enterprise NX-01 designed for long-range exploration of the galaxy and captained by Jonathan Archer. The NX designation indicates that this Enterprise is an experimental prototype.",
+            "origin_country": [
+                "US"
+            ],
+            "popularity": 21.148
+        },
+        {
+            "original_name": "Star Trek: The Next Generation",
+            "id": 655,
+            "name": "Star Trek: The Next Generation",
+            "vote_count": 557,
+            "vote_average": 8.2,
+            "first_air_date": "1987-09-28",
+            "poster_path": "/8ZfPKg1xTahEigpDA53bRmmLdvs.jpg",
+            "genre_ids": [
+                18,
+                9648,
+                10759,
+                10765
+            ],
+            "original_language": "en",
+            "backdrop_path": "/8do6gZErem4wfdPwALiT8agtJfb.jpg",
+            "overview": "Follow the intergalactic adventures of Capt. Jean-Luc Picard and his loyal crew aboard the all-new USS Enterprise NCC-1701D, as they explore new worlds.",
+            "origin_country": [
+                "US"
+            ],
+            "popularity": 28.026
+        },
+        {
+            "original_name": "\u5b87\u5b99\u6226\u8266\u30e4\u30de\u30c8\uff12\uff11\uff19\uff19",
+            "id": 45844,
+            "name": "Space Battleship Yamato 2199",
+            "vote_count": 4,
+            "vote_average": 8.0,
+            "first_air_date": "2013-04-07",
+            "poster_path": "/7KU6CH4RVateztuz2Il42tVj7C2.jpg",
+            "genre_ids": [
+                16,
+                18,
+                10759
+            ],
+            "original_language": "ja",
+            "backdrop_path": "/vhajLP1P26aUzpq4xuO8imzh9IF.jpg",
+            "overview": "The year is 2199. The human race has been crushed in their war with the Gamilos, driven into underground cities by the invader's assault. Scientists estimate they have only a year left. The young officers Susumu Kodai and Daisuke Shima receive a mysterious capsule from a ship that made an emergency landing on Mars and return with it to Earth. It contains humanity's last hope: the planet Iscandar on the other side of the Magellan Galaxy has the technology to defeat the Gamilos and restore the planet. The space battleship Yamato is entrusted with this task, but they have only one year before humanity ends.",
+            "origin_country": [
+                "JP"
+            ],
+            "popularity": 19.537
+        },
+        {
+            "original_name": "Firefly",
+            "id": 1437,
+            "name": "Firefly",
+            "vote_count": 925,
+            "vote_average": 8.2,
+            "first_air_date": "2002-09-20",
+            "poster_path": "/mWNadwBZIx8NyEw4smGftYtHHrE.jpg",
+            "genre_ids": [
+                18,
+                10759,
+                10765
+            ],
+            "original_language": "en",
+            "backdrop_path": "/tGgZdD29MeMLvoQHMxyD1PN1k5k.jpg",
+            "overview": "Firefly is set in the year 2517, after the arrival of humans in a new star system and follows the adventures of the renegade crew of Serenity, a \"Firefly-class\" spaceship. The ensemble cast portrays the nine characters who live on Serenity.",
+            "origin_country": [
+                "US"
+            ],
+            "popularity": 15.01
+        },
+        {
+            "original_name": "Dark Matter",
+            "id": 62425,
+            "name": "Dark Matter",
+            "vote_count": 449,
+            "vote_average": 6.4,
+            "first_air_date": "2015-06-12",
+            "poster_path": "/oWYOFBvIMkW64n51uD4mdje6k2u.jpg",
+            "genre_ids": [
+                18,
+                878
+            ],
+            "original_language": "en",
+            "backdrop_path": "/4wwWDjLfJVMt2hh8DIa2rzEx5VS.jpg",
+            "overview": "The six-person crew of a derelict spaceship awakens from stasis in the farthest reaches of space. Their memories wiped clean, they have no recollection of who they are or how they got on board. The only clue to their identities is a cargo bay full of weaponry and a destination: a remote mining colony that is about to become a war zone. With no idea whose side they are on, they face a deadly decision. Will these amnesiacs turn their backs on history, or will their pasts catch up with them?",
+            "origin_country": [
+                "CA"
+            ],
+            "popularity": 13.384
+        },
+        {
+            "original_name": "Ascension",
+            "id": 60741,
+            "name": "Ascension",
+            "vote_count": 135,
+            "vote_average": 6.7,
+            "first_air_date": "2014-12-15",
+            "poster_path": "/j12TToESSv9zEtNDo8rM7J1Uia3.jpg",
+            "genre_ids": [
+                18,
+                10765
+            ],
+            "original_language": "en",
+            "backdrop_path": "/mH7ZoCMDwE9eidcocfol1nOH8ij.jpg",
+            "overview": "In 1963, the U.S. government launched a covert space mission sending hundreds of men, women and children on a century-long voyage aboard the starship Ascension to populate a new world. Nearly 50 years into the journey, as they approach the point of no return, a mysterious murder of a young woman causes the ship\u2019s population to question the true nature of their mission.",
+            "origin_country": [
+                "CA",
+                "US"
+            ],
+            "popularity": 8.586
+        },
+        {
+            "original_name": "Lego Star Wars: Droid Tales",
+            "id": 63722,
+            "name": "Lego Star Wars: Droid Tales",
+            "vote_count": 10,
+            "vote_average": 5.4,
+            "first_air_date": "2015-10-05",
+            "poster_path": "/2eSTFO6PimOGORZrhjlyU2hqeiR.jpg",
+            "genre_ids": [
+                16
+            ],
+            "original_language": "en",
+            "backdrop_path": "/5NCO3bOn8N8cMaJAxKNtpaBZPZH.jpg",
+            "overview": "Following their victory celebration in the Ewok village on Endor, seen at the close of Star Wars: Return of the Jedi, C-3PO and R2-D2 have gathered to regale Luke, Leia, Han, Chewbacca and the other Rebels with the tales of their adventures that led to the events of Star Wars: The Phantom Menace. An accidental kidnapping occurs while the droids are reminiscing and suddenly viewers are taken on a new adventure that leads to encounters with familiar faces and places that prompt the re-telling of the entire saga. The series offers all of the playful humor that viewers expect from LEGO Star Wars.",
+            "origin_country": [
+                "US"
+            ],
+            "popularity": 5.573
+        },
+        {
+            "backdrop_path": "/3cm01zF1SBEhYfmpsPiDqIe2Rcn.jpg",
+            "first_air_date": "2003-11-07",
+            "genre_ids": [
+                10759,
+                16
+            ],
+            "id": 3122,
+            "name": "Star Wars: Clone Wars",
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "Star Wars: Clone Wars",
+            "overview": "Star Wars: Clone Wars is an Emmy Award- and Annie Award-winning American animated microseries set in the Star Wars universe.\n\nChronologically, the series takes place during the three-year time period between the prequel films Attack of the Clones and Revenge of the Sith. The show depicted the actions of various characters in the Star Wars prequel trilogy, including Anakin Skywalker, Obi-Wan Kenobi, Mace Windu, and other Knights of the Jedi Order during the conflict, leading the clone trooper forces of the Galactic Republic against the battle droid armies of the Confederacy of Independent Systems and the Sith.",
+            "poster_path": "/3Uv9vwC8t8h9YXALdZFzDNihfku.jpg",
+            "vote_average": 7.1,
+            "vote_count": 51,
+            "popularity": 5.34
+        },
+        {
+            "original_name": "Battlestar Galactica",
+            "id": 501,
+            "name": "Battlestar Galactica",
+            "vote_count": 77,
+            "vote_average": 7.0,
+            "first_air_date": "1978-09-17",
+            "poster_path": "/kK3ugC3lf5MgXBywf13U4Vop5cs.jpg",
+            "genre_ids": [
+                18,
+                878
+            ],
+            "original_language": "en",
+            "backdrop_path": "/ssDW4RcURoXsYrVlLlSgmDUTE3T.jpg",
+            "overview": "When the 12 Colonies of Man are wiped out by a cybernetic race called the Cylons, Commander Adama and the crew of the battlestar Galactica lead a ragtag fleet of human survivors in search of a \"mythical planet\" called Earth.",
+            "origin_country": [
+                "US"
+            ],
+            "popularity": 8.149
+        },
+        {
+            "original_name": "Star Trek: The Animated Series",
+            "id": 1992,
+            "name": "Star Trek: The Animated Series",
+            "vote_count": 33,
+            "vote_average": 6.9,
+            "first_air_date": "1973-09-08",
+            "poster_path": "/6FmRAQwImKK5CSVdrGS7k5xGuHo.jpg",
+            "genre_ids": [
+                16,
+                18,
+                10765
+            ],
+            "original_language": "en",
+            "backdrop_path": "/7kV0OtzBmlufJCFDfczFfnWt3So.jpg",
+            "overview": "Star Trek: The Animated Series is an animated science fiction television series set in the Star Trek universe following the events of Star Trek: The Original Series of the 1960s. The animated series was aired under the name Star Trek, but it has become widely known under this longer name to differentiate it from the original live-action Star Trek. The success in syndication of the original live action series and fan pressure for a Star Trek revival led to The Animated Series from 1973\u20131974, as the source of new adventures of the Enterprise crew, the next being the 1979 live-action feature film Star Trek: The Motion Picture. The 'TAS' series was the original cast's last episodic portrayal of the characters until the \"cartoon like\" graphics of the Star Trek: 25th Anniversary computer game in 1992, as well as its sequel Star Trek: Judgment Rites in 1993, both of which appeared after the cast's last movie together in 1991's Star Trek VI: The Undiscovered Country. TAS was the first Star Trek series to win an Emmy Award.",
+            "origin_country": [
+                "US"
+            ],
+            "popularity": 5.094
+        }
+    ],
+    "total_pages": 2,
+    "total_results": 31
+}
