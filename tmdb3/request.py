@@ -18,7 +18,7 @@ import urllib.parse
 import json
 
 DEBUG = False
-cache = Cache(filename='pytmdb3.cache')
+cache = Cache(filename="pytmdb3.cache")
 
 # DEBUG = True
 # cache = Cache(engine='null')
@@ -50,8 +50,9 @@ class Request(urllib.request.Request):
     @property
     def api_key(self):
         if self._api_key is None:
-            raise TMDBKeyMissing("API key must be specified before "
-                                 "requests can be made")
+            raise TMDBKeyMissing(
+                "API key must be specified before " "requests can be made"
+            )
         return self._api_key
 
     def __init__(self, url, **kwargs):
@@ -59,20 +60,20 @@ class Request(urllib.request.Request):
         Return a request object, using specified API path and
         arguments.
         """
-        kwargs['api_key'] = self.api_key
-        self._url = url.lstrip('/')
+        kwargs["api_key"] = self.api_key
+        self._url = url.lstrip("/")
         self._kwargs = dict(
-            [(kwa, kwv) for kwa, kwv in list(
-                kwargs.items()) if kwv is not None])
+            [(kwa, kwv) for kwa, kwv in list(kwargs.items()) if kwv is not None]
+        )
 
         locale = get_locale()
         kwargs = {}
         for k, v in list(self._kwargs.items()):
             kwargs[k] = locale.encode(v)
-        url = f'{self._base_url}{self._url}?{urllib.parse.urlencode(kwargs)}'
+        url = f"{self._base_url}{self._url}?{urllib.parse.urlencode(kwargs)}"
 
         urllib.request.Request.__init__(self, url)
-        self.add_header('Accept', 'application/json')
+        self.add_header("Accept", "application/json")
         self.lifetime = 3600  # 1hr
 
     def new(self, **kwargs):
@@ -98,9 +99,9 @@ class Request(urllib.request.Request):
         """Open a file object to the specified URL."""
         try:
             if DEBUG:
-                print('loading ' + self.get_full_url())
+                print("loading " + self.get_full_url())
                 if self.data:
-                    print('  ' + self.data)
+                    print("  " + self.data)
             return urllib.request.urlopen(self)
         except urllib.error.HTTPError as e:
             raise TMDBHTTPError(e)
@@ -131,39 +132,49 @@ class Request(urllib.request.Request):
         handle_status(data, url)
         if DEBUG:
             import pprint
+
             pprint.PrettyPrinter().pprint(data)
         return data
 
 
 status_handlers = {
     1: None,
-    2: TMDBRequestInvalid('Invalid service - This service does not exist.'),
-    3: TMDBRequestError('Authentication Failed - You do not have '
-                        'permissions to access this service.'),
-    4: TMDBRequestInvalid("Invalid format - This service doesn't exist "
-                          "in that format."),
-    5: TMDBRequestInvalid('Invalid parameters - Your request parameters '
-                          'are incorrect.'),
-    6: TMDBRequestInvalid('Invalid id - The pre-requisite id is invalid '
-                          'or not found.'),
-    7: TMDBKeyInvalid('Invalid API key - You must be granted a valid key.'),
-    8: TMDBRequestError('Duplicate entry - The data you tried to submit '
-                        'already exists.'),
-    9: TMDBOffline('This service is temporarily offline. Try again later.'),
-    10: TMDBKeyRevoked('Suspended API key - Access to your account has been '
-                       'suspended, contact TMDB.'),
-    11: TMDBError('Internal error - Something went wrong. Contact TMDb.'),
+    2: TMDBRequestInvalid("Invalid service - This service does not exist."),
+    3: TMDBRequestError(
+        "Authentication Failed - You do not have "
+        "permissions to access this service."
+    ),
+    4: TMDBRequestInvalid(
+        "Invalid format - This service doesn't exist " "in that format."
+    ),
+    5: TMDBRequestInvalid(
+        "Invalid parameters - Your request parameters " "are incorrect."
+    ),
+    6: TMDBRequestInvalid(
+        "Invalid id - The pre-requisite id is invalid " "or not found."
+    ),
+    7: TMDBKeyInvalid("Invalid API key - You must be granted a valid key."),
+    8: TMDBRequestError(
+        "Duplicate entry - The data you tried to submit " "already exists."
+    ),
+    9: TMDBOffline("This service is temporarily offline. Try again later."),
+    10: TMDBKeyRevoked(
+        "Suspended API key - Access to your account has been "
+        "suspended, contact TMDB."
+    ),
+    11: TMDBError("Internal error - Something went wrong. Contact TMDb."),
     12: None,
     13: None,
-    14: TMDBRequestError('Authentication Failed.'),
-    15: TMDBError('Failed'),
-    16: TMDBError('Device Denied'),
-    17: TMDBError('Session Denied')}
+    14: TMDBRequestError("Authentication Failed."),
+    15: TMDBError("Failed"),
+    16: TMDBError("Device Denied"),
+    17: TMDBError("Session Denied"),
+}
 
 
 def handle_status(data, query):
-    status = status_handlers[data.get('status_code', 1)]
+    status = status_handlers[data.get("status_code", 1)]
     if status is not None:
-        status.tmdberrno = data['status_code']
+        status.tmdberrno = data["status_code"]
         status.query = query
         raise status

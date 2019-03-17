@@ -13,7 +13,7 @@ syslocale = None
 
 
 class LocaleBase(object):
-    __slots__ = ['__immutable']
+    __slots__ = ["__immutable"]
     _stored = {}
     fallthrough = False
 
@@ -23,15 +23,17 @@ class LocaleBase(object):
         self.__immutable = True
 
     def __setattr__(self, key, value):
-        if getattr(self, '__immutable', False):
-            raise NotImplementedError(self.__class__.__name__ +
-                                      ' does not support modification.')
+        if getattr(self, "__immutable", False):
+            raise NotImplementedError(
+                self.__class__.__name__ + " does not support modification."
+            )
         super(LocaleBase, self).__setattr__(key, value)
 
     def __delattr__(self, key):
-        if getattr(self, '__immutable', False):
-            raise NotImplementedError(self.__class__.__name__ +
-                                      ' does not support modification.')
+        if getattr(self, "__immutable", False):
+            raise NotImplementedError(
+                self.__class__.__name__ + " does not support modification."
+            )
         super(LocaleBase, self).__delattr__(key)
 
     def __lt__(self, other):
@@ -51,12 +53,18 @@ class LocaleBase(object):
             return cls._stored[key.lower()]
         except:
             raise TMDBLocaleError(
-                f"'{key}' is not a known valid {cls.__name__} code.")
+                f"'{key}' is not a known valid {cls.__name__} code."
+            )
 
 
 class Language(LocaleBase):
-    __slots__ = ['ISO639_1', 'ISO639_2', 'ISO639_2B', 'englishname',
-                 'nativename']
+    __slots__ = [
+        "ISO639_1",
+        "ISO639_2",
+        "ISO639_2B",
+        "englishname",
+        "nativename",
+    ]
     _stored = {}
 
     def __init__(self, iso1, iso2, ename):
@@ -75,7 +83,7 @@ class Language(LocaleBase):
 
 
 class Country(LocaleBase):
-    __slots__ = ['alpha2', 'name']
+    __slots__ = ["alpha2", "name"]
     _stored = {}
 
     def __init__(self, alpha2, name):
@@ -91,12 +99,12 @@ class Country(LocaleBase):
 
 
 class Locale(LocaleBase):
-    __slots__ = ['language', 'country', 'encoding']
+    __slots__ = ["language", "country", "encoding"]
 
     def __init__(self, language, country, encoding, *keys):
         self.language = Language.getstored(language)
         self.country = Country.getstored(country)
-        self.encoding = encoding if encoding else 'latin-1'
+        self.encoding = encoding if encoding else "latin-1"
         super(Locale, self).__init__(*keys)
 
     def __str__(self):
@@ -139,10 +147,10 @@ def set_locale(language=None, country=None, fallthrough=False):
         if syslocale is not None:
             dat = (str(syslocale.language), str(syslocale.country))
         else:
-            if (sysloc is None) or ('_' not in sysloc):
-                dat = ('en', 'US')
+            if (sysloc is None) or ("_" not in sysloc):
+                dat = ("en", "US")
             else:
-                dat = sysloc.split('_')
+                dat = sysloc.split("_")
         if language is None:
             language = dat[0]
         if country is None:
@@ -254,7 +262,9 @@ Language("is", "ice/isl", "Icelandic")
 Language("io", "ido", "Ido")
 Language("ig", "ibo", "Igbo")
 Language("id", "ind", "Indonesian")
-Language("ia", "ina", "Interlingua (International Auxiliary Language Association)")
+Language(
+    "ia", "ina", "Interlingua (International Auxiliary Language Association)"
+)
 Language("ie", "ile", "Interlingue")
 Language("iu", "iku", "Inuktitut")
 Language("ik", "ipk", "Inupiaq")

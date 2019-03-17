@@ -15,6 +15,7 @@ class Engines(object):
     """
     Static collector for engines to register against.
     """
+
     def __init__(self):
         self._engines = {}
 
@@ -37,15 +38,16 @@ class CacheEngineType(type):
     Cache Engine Metaclass that registers new engines against the cache
     for named selection and use.
     """
+
     def __init__(cls, name, bases, attrs):
         super(CacheEngineType, cls).__init__(name, bases, attrs)
-        if name != 'CacheEngine':
+        if name != "CacheEngine":
             # skip base class
             Engines.register(cls)
 
 
 class CacheEngine(object, metaclass=CacheEngineType):
-    name = 'unspecified'
+    name = "unspecified"
 
     def __init__(self, parent):
         self.parent = ref(parent)

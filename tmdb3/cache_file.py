@@ -64,6 +64,7 @@ try:
         Supports an optional callback to process the error and optionally
         suppress it.
         """
+
         LOCK_EX = fcntl.LOCK_EX
         LOCK_SH = fcntl.LOCK_SH
 
@@ -83,17 +84,18 @@ try:
             return suppress
 
     def parse_filename(filename):
-        if '$' in filename:
+        if "$" in filename:
             # replace any environmental variables
             filename = os.path.expandvars(filename)
-        if filename.startswith('~'):
+        if filename.startswith("~"):
             # check for home directory
             return os.path.expanduser(filename)
-        elif filename.startswith('/'):
+        elif filename.startswith("/"):
             # check for absolute path
             return filename
         # return path with temp directory prepended
-        return '/tmp/' + filename
+        return "/tmp/" + filename
+
 
 except ImportError:
     import msvcrt
@@ -119,26 +121,26 @@ except ImportError:
             return suppress
 
     def parse_filename(filename):
-        if '%' in filename:
+        if "%" in filename:
             # replace any environmental variables
             filename = os.path.expandvars(filename)
-        if filename.startswith('~'):
+        if filename.startswith("~"):
             # check for home directory
             return os.path.expanduser(filename)
-        elif (ord(filename[0]) in (
-                list(range(65, 91)) + list(range(99, 123)))) and (
-                filename[1:3] == ':\\'):
+        elif (
+            ord(filename[0]) in (list(range(65, 91)) + list(range(99, 123)))
+        ) and (filename[1:3] == ":\\"):
             # check for absolute drive path (e.g. C:\...)
             return filename
-        elif (filename.count('\\') >= 3) and (filename.startswith('\\\\')):
+        elif (filename.count("\\") >= 3) and (filename.startswith("\\\\")):
             # check for absolute UNC path (e.g. \\server\...)
             return filename
         # return path with temp directory prepended
-        return os.path.expandvars(os.path.join('%TEMP%', filename))
+        return os.path.expandvars(os.path.join("%TEMP%", filename))
 
 
 class FileCacheObject(CacheObject):
-    _struct = struct.Struct('dII')  # double and two ints
+    _struct = struct.Struct("dII")  # double and two ints
     #                               # timestamp, lifetime, position
 
     @classmethod
@@ -212,8 +214,9 @@ class FileCacheObject(CacheObject):
 
 class FileEngine(CacheEngine):
     """Simple file-backed engine."""
-    name = 'file'
-    _struct = struct.Struct('HH')  # two shorts for version and count
+
+    name = "file"
+    _struct = struct.Struct("HH")  # two shorts for version and count
     _version = 2
 
     def __init__(self, parent):
@@ -238,7 +241,7 @@ class FileEngine(CacheEngine):
         try:
             # attempt to read existing cache at filename
             # handle any errors that occur
-            self._open('r+b')
+            self._open("r+b")
             # seems to have read fine, make sure we have write access
             if not os.access(self.cachefile, os.W_OK):
                 raise TMDBCacheWriteError(self.cachefile)
@@ -247,7 +250,7 @@ class FileEngine(CacheEngine):
             if e.errno == errno.ENOENT:
                 # file does not exist, create a new one
                 try:
-                    self._open('w+b')
+                    self._open("w+b")
                     self._write([])
                 except IOError as e:
                     if e.errno == errno.ENOENT:
@@ -268,15 +271,15 @@ class FileEngine(CacheEngine):
 
     def get(self, date):
         self._init_cache()
-        self._open('r+b')
-        
+        self._open("r+b")
+
         with Flock(self.cachefd, Flock.LOCK_SH):
             # return any new objects in the cache
             return self._read(date)
 
     def put(self, key, value, lifetime):
         self._init_cache()
-        self._open('r+b')
+        self._open("r+b")
 
         with Flock(self.cachefd, Flock.LOCK_EX):
             newobjs = self._read(self.age)
@@ -285,11 +288,11 @@ class FileEngine(CacheEngine):
             # this will cause a new file object to be opened with the proper
             # access mode, however the Flock should keep the old object open
             # and properly locked
-            self._open('r+b')
+            self._open("r+b")
             self._write(newobjs)
             return newobjs
 
-    def _open(self, mode='r+b'):
+    def _open(self, mode="r+b"):
         # enforce binary operation
         try:
             if self.cachefd.mode == mode:
@@ -304,7 +307,8 @@ class FileEngine(CacheEngine):
         try:
             self.cachefd.seek(0)
             version, count = self._struct.unpack(
-                self.cachefd.read(self._struct.size))
+                self.cachefd.read(self._struct.size)
+            )
             if version != self._version:
                 # old version, break out and well rewrite when finished
                 raise Exception
@@ -367,7 +371,7 @@ class FileEngine(CacheEngine):
             data.position = end
 
             # write incremental update to free slot
-            self.cachefd.seek(4 + 16*(self.size-self.free))
+            self.cachefd.seek(4 + 16 * (self.size - self.free))
             data.dumpslot(self.cachefd)
             data.dumpdata(self.cachefd)
 
@@ -385,13 +389,13 @@ class FileEngine(CacheEngine):
             prev = None
             for d in data:
                 if prev == None:
-                    d.position = 4 + 16*size
+                    d.position = 4 + 16 * size
                 else:
                     d.position = prev.position + prev.size
                 d.dumpslot(self.cachefd)
                 prev = d
             # fill in allocated slots
-            for i in range(2**8):
+            for i in range(2 ** 8):
                 self.cachefd.write(FileCacheObject._struct.pack(0, 0, 0))
             # write stored data
             for d in data:

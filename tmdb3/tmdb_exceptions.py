@@ -28,7 +28,7 @@ class TMDBError(Exception):
     def __init__(self, msg=None, errno=0):
         self.errno = errno
         if errno == 0:
-            self.errno = getattr(self, 'TMDB' + self.__class__.__name__, errno)
+            self.errno = getattr(self, "TMDB" + self.__class__.__name__, errno)
         self.args = (msg,)
 
 
@@ -67,21 +67,24 @@ class TMDBCacheError(TMDBRequestError):
 class TMDBCacheReadError(TMDBCacheError):
     def __init__(self, filename):
         super(TMDBCacheReadError, self).__init__(
-            f"User does not have permission to access cache file: {filename}.")
+            f"User does not have permission to access cache file: {filename}."
+        )
         self.filename = filename
 
 
 class TMDBCacheWriteError(TMDBCacheError):
     def __init__(self, filename):
         super(TMDBCacheWriteError, self).__init__(
-            f"User does not have permission to write cache file: {filename}.")
+            f"User does not have permission to write cache file: {filename}."
+        )
         self.filename = filename
 
 
 class TMDBCacheDirectoryError(TMDBCacheError):
     def __init__(self, filename):
         super(TMDBCacheDirectoryError, self).__init__(
-            f"Directory containing cache file does not exist: {filename}.")
+            f"Directory containing cache file does not exist: {filename}."
+        )
         self.filename = filename
 
 
