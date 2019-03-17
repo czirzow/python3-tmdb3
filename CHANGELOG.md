@@ -1,9 +1,11 @@
 # Changelog
 
-## [Unreleased]
+## [0.8.0] - 2019/03/17
+- CI integration with coverage
+- Add tests
 - Add `CHANGELOG.md` file
-- Add `Python 3.6+` support (with fstring feature implemented)
-- Drop `Python2` support
+- Add Python 3.6+ support
+- Drop Python2 support
 ## [0.7.2] - 2015/01/18
 - Add similar and keywords to TV Series
 - Fix unicode issues with search result object names
