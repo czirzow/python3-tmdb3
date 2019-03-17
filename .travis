@@ -1,0 +1,12 @@
+language: python
+python:
+  - "3.6-dev"
+  - "3.7-dev"
+install:
+  - pip install -r requirements.txt
+before_script:
+  - pip install -r requirements-dev.txt
+script:
+  - py.test --doctest-modules --pep8 tmdb3 -v --cov tmdb3 --cov-report term-missing
+after_success:
+  - coveralls
