@@ -402,7 +402,8 @@ class AppleTrailer(Element):
         if size is None:
             # sort assuming ###p format for now, take largest resolution
             size = (
-                str(sorted([int(size[:-1]) for size in self.sources])[-1]) + "p"
+                str(sorted([int(size[:-1]) for size in self.sources])[-1])
+                + "p"
             )
         return self.sources[size].source
 
@@ -464,7 +465,8 @@ class Studio(NameRepr, Element):
 
     def _populate_movies(self):
         return Request(
-            "company/{0}/movies".format(self.id), language=self._locale.language
+            "company/{0}/movies".format(self.id),
+            language=self._locale.language,
         )
 
     # FIXME: add a cleaner way of adding types with no additional processing

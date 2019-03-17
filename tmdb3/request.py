@@ -63,7 +63,11 @@ class Request(urllib.request.Request):
         kwargs["api_key"] = self.api_key
         self._url = url.lstrip("/")
         self._kwargs = dict(
-            [(kwa, kwv) for kwa, kwv in list(kwargs.items()) if kwv is not None]
+            [
+                (kwa, kwv)
+                for kwa, kwv in list(kwargs.items())
+                if kwv is not None
+            ]
         )
 
         locale = get_locale()

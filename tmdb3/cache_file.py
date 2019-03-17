@@ -204,7 +204,9 @@ class FileCacheObject(CacheObject):
 
     def dumpslot(self, fd):
         pos = fd.tell()
-        fd.write(self._struct.pack(self.creation, self.lifetime, self.position))
+        fd.write(
+            self._struct.pack(self.creation, self.lifetime, self.position)
+        )
 
     def dumpdata(self, fd):
         self.size
@@ -388,7 +390,7 @@ class FileEngine(CacheEngine):
             # write storage slot definitions
             prev = None
             for d in data:
-                if prev == None:
+                if prev is None:
                     d.position = 4 + 16 * size
                 else:
                     d.position = prev.position + prev.size

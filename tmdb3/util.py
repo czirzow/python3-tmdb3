@@ -63,7 +63,9 @@ class Poller(object):
     def __call__(self):
         # retrieve data from callable function, and apply
         if not callable(self.func):
-            raise RuntimeError("Poller object called without a source function")
+            raise RuntimeError(
+                "Poller object called without a source function"
+            )
         req = self.func()
         if (
             ("language" in req._kwargs)
@@ -88,7 +90,9 @@ class Poller(object):
         # apply data directly, bypassing callable function
         unfilled = False
         for k, v in list(self.lookup.items()):
-            if (k in data) and (not callable(self.func) or data[k] is not None):
+            if (k in data) and (
+                not callable(self.func) or data[k] is not None
+            ):
                 # argument received data, populate it
                 setattr(self.inst, v, data[k])
             elif v in self.inst._data:
