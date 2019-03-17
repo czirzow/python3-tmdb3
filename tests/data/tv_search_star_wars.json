@@ -1,0 +1,360 @@
+{
+    "page": 1,
+    "total_results": 18,
+    "total_pages": 1,
+    "results": [
+        {
+            "original_name": "Star Wars: The Clone Wars",
+            "id": 4194,
+            "name": "Star Wars: The Clone Wars",
+            "vote_count": 160,
+            "vote_average": 7.49,
+            "poster_path": "/p6s2svEHHLsQ1TOw4Si54c1dD5L.jpg",
+            "first_air_date": "2008-10-03",
+            "popularity": 31.739,
+            "genre_ids": [
+                10759,
+                16,
+                10765
+            ],
+            "original_language": "en",
+            "backdrop_path": "/gAlEO2hFU29uFv6RcC7efps0iL9.jpg",
+            "overview": "Yoda, Obi-Wan Kenobi, Anakin Skywalker, Mace Windu and other Jedi Knights lead the Grand Army of the Republic against the droid army of the Separatists.",
+            "origin_country": [
+                "SG",
+                "US"
+            ]
+        },
+        {
+            "original_name": "Star Wars Rebels",
+            "id": 60554,
+            "name": "Star Wars Rebels",
+            "vote_count": 153,
+            "vote_average": 7.13,
+            "poster_path": "/dfzbkhKMnkdwiG1AAIJnrc9SDdY.jpg",
+            "first_air_date": "2014-10-13",
+            "popularity": 22.528,
+            "genre_ids": [
+                10759,
+                16
+            ],
+            "original_language": "en",
+            "backdrop_path": "/2haokMQ2dFQK2z1R9gZrH9qAeqk.jpg",
+            "overview": "Set between the events of Star Wars: Episodes III and IV, the story unfolds during a dark time when the evil Galactic Empire is tightening its grip of power on the galaxy. Imperial forces have occupied a remote planet and are ruining the lives of its people. The motley but clever crew of the starship Ghost \u2014 cowboy Jedi Kanan, ace pilot Hera, street-smart teenager Ezra, the \u201cmuscle\u201d Zeb, warrior firebrand Sabine, and cantankerous old astromech droid Chopper \u2014 is among a select few who are brave enough to stand against the Empire. Together, they will face threatening new villains, encounter colorful adversaries, embark on thrilling adventures, and become heroes with the power to ignite a rebellion.",
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "original_name": "Star Wars Resistance",
+            "id": 79093,
+            "name": "Star Wars Resistance",
+            "vote_count": 5,
+            "vote_average": 6.8,
+            "poster_path": "/hHPbh6mJkpxGREMKgJ9FpZNlxPd.jpg",
+            "first_air_date": "2018-10-07",
+            "popularity": 10.388,
+            "genre_ids": [
+                10765,
+                16,
+                10759
+            ],
+            "original_language": "en",
+            "backdrop_path": "/4y3J0MN84Ylqy5Vc4cwE6Zdga99.jpg",
+            "overview": "Kazuda Xiono, a young pilot for the Resistance, is tasked with a top secret mission to investigate the First Order, a growing threat in the galaxy.",
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "original_name": "Star Wars: Clone Wars",
+            "id": 3122,
+            "name": "Star Wars: Clone Wars",
+            "vote_count": 47,
+            "vote_average": 7.25,
+            "poster_path": "/3Uv9vwC8t8h9YXALdZFzDNihfku.jpg",
+            "first_air_date": "2003-11-07",
+            "popularity": 5.386,
+            "genre_ids": [
+                10759,
+                16
+            ],
+            "original_language": "en",
+            "backdrop_path": "/3cm01zF1SBEhYfmpsPiDqIe2Rcn.jpg",
+            "overview": "Star Wars: Clone Wars is an Emmy Award- and Annie Award-winning American animated microseries set in the Star Wars universe.\n\nChronologically, the series takes place during the three-year time period between the prequel films Attack of the Clones and Revenge of the Sith. The show depicted the actions of various characters in the Star Wars prequel trilogy, including Anakin Skywalker, Obi-Wan Kenobi, Mace Windu, and other Knights of the Jedi Order during the conflict, leading the clone trooper forces of the Galactic Republic against the battle droid armies of the Confederacy of Independent Systems and the Sith.",
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "original_name": "Lego Star Wars: Droid Tales",
+            "id": 63722,
+            "name": "Lego Star Wars: Droid Tales",
+            "vote_count": 9,
+            "vote_average": 5.38,
+            "poster_path": "/2eSTFO6PimOGORZrhjlyU2hqeiR.jpg",
+            "first_air_date": "2015-10-05",
+            "popularity": 5.068,
+            "genre_ids": [
+                16
+            ],
+            "original_language": "en",
+            "backdrop_path": "/5NCO3bOn8N8cMaJAxKNtpaBZPZH.jpg",
+            "overview": "Following their victory celebration in the Ewok village on Endor, seen at the close of Star Wars: Return of the Jedi, C-3PO and R2-D2 have gathered to regale Luke, Leia, Han, Chewbacca and the other Rebels with the tales of their adventures that led to the events of Star Wars: The Phantom Menace. An accidental kidnapping occurs while the droids are reminiscing and suddenly viewers are taken on a new adventure that leads to encounters with familiar faces and places that prompt the re-telling of the entire saga. The series offers all of the playful humor that viewers expect from LEGO Star Wars.",
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "original_name": "Star Wars: Droids",
+            "id": 25,
+            "name": "Star Wars: Droids",
+            "vote_count": 11,
+            "vote_average": 4.27,
+            "poster_path": "/wajb1xWweHREBxWl58gE1QKjoTy.jpg",
+            "first_air_date": "1985-09-07",
+            "popularity": 2.779,
+            "genre_ids": [
+                10762,
+                16,
+                35,
+                10759
+            ],
+            "original_language": "en",
+            "backdrop_path": "/5AS13jFoVGB7fq5p4HVONKPjxQd.jpg",
+            "overview": "Star Wars: Droids, also known as Droids: The Adventures of R2-D2 and C-3PO, and 2004 re-released on DVD as Star Wars Animated Adventures: Droids, is an animated television series that features the exploits of R2-D2 and C-3PO, the droids who have appeared in all six Star Wars films. The series takes place between the events depicted in Star Wars Episode III: Revenge of the Sith and Star Wars Episode IV: A New Hope.\n\nOver the course of the series, the droids team up with four different sets of masters. The series is divided up into three cycles: at the beginning of each, the droids usually run into their new masters in an accidental way, and at the end of each cycle, they usually are forced to leave their masters for one reason or another. The Great Heep, a television special following the series, served as a prequel to the third Mungo Baobab cycle.\n\nThe series' opening theme, \"Trouble Again,\" was performed by Stewart Copeland of the Police and written by Copeland and Derek Holt.",
+            "origin_country": [
+                "US",
+                "CA"
+            ]
+        },
+        {
+            "original_name": "Star Wars: Ewoks",
+            "id": 3478,
+            "name": "Star Wars: Ewoks",
+            "vote_count": 5,
+            "vote_average": 6,
+            "poster_path": "/uv7QkoePPK5PfpYVVim6JI8DEpO.jpg",
+            "first_air_date": "1985-09-07",
+            "popularity": 2.541,
+            "genre_ids": [
+                16,
+                10765
+            ],
+            "original_language": "en",
+            "backdrop_path": "/a2oOSExT1KrkczNafY3nbmwd403.jpg",
+            "overview": "Star Wars: Ewoks is an American/Canadian animated television series featuring the Ewok characters introduced in Star Wars Episode VI: Return of the Jedi. It aired for two seasons between 1985 and 1986.\n\nThe series was produced by Nelvana on behalf of Lucasfilm and broadcast on ABC, both by itself and later, as part of The Ewoks and Droids Adventure Hour. The first season was advertised as simply Ewoks, but the second season was advertised as The All New Ewoks. The series lasted 35 episodes.",
+            "origin_country": [
+                "CA",
+                "US"
+            ]
+        },
+        {
+            "original_name": "Star Wars: Forces of Destiny",
+            "id": 71412,
+            "name": "Star Wars: Forces of Destiny",
+            "vote_count": 5,
+            "vote_average": 4.8,
+            "poster_path": "/a5d2y264VgYUvpKUNNT6EbL1Cwb.jpg",
+            "first_air_date": "2017-07-03",
+            "popularity": 3.165,
+            "genre_ids": [
+                10765,
+                16,
+                10759,
+                10751
+            ],
+            "original_language": "en",
+            "backdrop_path": "/rfxCWSwzkeeQne9Mb8kNPDqZYBC.jpg",
+            "overview": "An animated micro-series starring Rey, Jyn Erso, Princess Leia, Ahsoka Tano, and more. Small moments and everyday decisions shape a larger heroic saga.",
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "original_name": "Lego Star Wars: The Yoda Chronicles",
+            "id": 61513,
+            "name": "Lego Star Wars: The Yoda Chronicles",
+            "vote_count": 5,
+            "vote_average": 6.1,
+            "poster_path": "/1S1j1QxwLNPNiUrq8GSg05KkAmY.jpg",
+            "first_air_date": "2013-05-29",
+            "popularity": 3.562,
+            "genre_ids": [
+                10765,
+                10759
+            ],
+            "original_language": "en",
+            "backdrop_path": "/cogF5KmbzRUlbegpRZstmrKZLOs.jpg",
+            "overview": "Yoda begins by training Padawans at the Jedi Temple Academy, but then he feels a disturbance in the Force and rushes off to fight the Dark Side.",
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "original_name": "Star Wars Galaxy of Adventures",
+            "id": 85536,
+            "name": "Star Wars Galaxy of Adventures",
+            "vote_count": 0,
+            "vote_average": 0,
+            "poster_path": "/isfH8bCqiVYpNfsDVyTfHjvLvSk.jpg",
+            "first_air_date": "2018-11-30",
+            "popularity": 1.4,
+            "genre_ids": [
+                10762,
+                10765
+            ],
+            "original_language": "en",
+            "backdrop_path": null,
+            "overview": "",
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "original_name": "Science of Star Wars",
+            "id": 81401,
+            "name": "Science of Star Wars",
+            "vote_count": 0,
+            "vote_average": 0,
+            "poster_path": "/bTaX5IDnbueFD0eHeUJVwUpyjcT.jpg",
+            "first_air_date": "2005-05-16",
+            "popularity": 1.092,
+            "genre_ids": [
+                99
+            ],
+            "original_language": "en",
+            "backdrop_path": null,
+            "overview": "This documentary series takes a look at the science of \"Star Wars\" and shows how many of the technologies depicted in the films are becoming reality.",
+            "origin_country": []
+        },
+        {
+            "original_name": "Lego Star Wars: The Freemaker Adventures",
+            "id": 66837,
+            "name": "Lego Star Wars: The Freemaker Adventures",
+            "vote_count": 7,
+            "vote_average": 7.57,
+            "poster_path": "/1uI5ZG2eGEV25n3klN4M1SrJCl0.jpg",
+            "first_air_date": "2016-06-20",
+            "popularity": 1.505,
+            "genre_ids": [
+                16
+            ],
+            "original_language": "en",
+            "backdrop_path": "/dsZl8Z5KDugiiBFYIFCnhK4t7oi.jpg",
+            "overview": "Set between The Empire Strikes Back and Return of the Jedi, The Freemaker Adventures centers on a family of three young siblings\u2014young boy Rowan, his sister Kordi, and their brother Zander\u2014known as the Freemakers, who salvage parts from destroyed or damaged ships which they use to build new ones, which they sell in order to make their living. They are accompanied by their salvaged battle droid Roger.",
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "original_name": "LEGO Star Wars: All-Stars",
+            "id": 83558,
+            "name": "LEGO Star Wars: All-Stars",
+            "vote_count": 0,
+            "vote_average": 0,
+            "poster_path": "/97dmYYI7TACdGvXWQd2sIyMq16n.jpg",
+            "first_air_date": "2018-11-10",
+            "popularity": 1.158,
+            "genre_ids": [
+                16
+            ],
+            "original_language": "en",
+            "backdrop_path": "/ivF9Khaenu3XwQLIdIBxsfpsIh4.jpg",
+            "overview": "An adventure series that spans all Star Wars eras featuring LEGO versions of the fresh faces of the Star Wars galaxy alongside iconic heroes including Kylo Ren, R2-D2, Young Han, Chewie, Young Lando, BB-8 and General Leia.",
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "original_name": "Star Wars Rebels Recon",
+            "id": 73518,
+            "name": "Star Wars Rebels Recon",
+            "vote_count": 1,
+            "vote_average": 5,
+            "poster_path": "/rwYL1fGB004owaTmprYmx8STKqq.jpg",
+            "first_air_date": "2014-10-03",
+            "popularity": 0.645,
+            "genre_ids": [],
+            "original_language": "en",
+            "backdrop_path": null,
+            "overview": "Webseries giving an inside look into the Star Wars Rebels TV Show",
+            "origin_country": []
+        },
+        {
+            "original_name": "Star Wars live-action TV series",
+            "id": 1541,
+            "name": "Star Wars live-action TV series",
+            "vote_count": 0,
+            "vote_average": 0,
+            "poster_path": null,
+            "first_air_date": "",
+            "popularity": 0.84,
+            "genre_ids": [],
+            "original_language": "en",
+            "backdrop_path": null,
+            "overview": "The Star Wars live-action television series is a project which has been in fluctuating stages of development at Lucasfilm since 2005, when George Lucas announced plans for a television series set between the prequel trilogy and the original trilogy of Star Wars. Unlike the films, the story does not center on the Skywalker saga, but instead explores criminal and political power struggles in the aftermath of the fall of the Republic.\n\nIn 2011, Lucas stated that development has been delayed awaiting advances in technology and reduction in costs and Rick McCallum, the Star Wars and Red Tails producer then involved with the project, indicated that it would be at least another \"three or four years\".\n\nFollowing The Walt Disney Company's acquisition of Lucasfilm, ABC Studios' president Paul Lee stated in early 2013 that the project was being reviewed for development.",
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "original_name": "LEGO Star Wars: The Resistance Rises",
+            "id": 66487,
+            "name": "LEGO Star Wars: The Resistance Rises",
+            "vote_count": 2,
+            "vote_average": 4.25,
+            "poster_path": "/ti5TWyuGzCREqx6HlFVh0QD98mB.jpg",
+            "first_air_date": "2016-02-15",
+            "popularity": 0.683,
+            "genre_ids": [
+                16,
+                10765
+            ],
+            "original_language": "en",
+            "backdrop_path": "/exF8uuuquq8RYtDL3W1chd0bzTH.jpg",
+            "overview": "A series of animated shorts that take place prior to the First Order's attack on Jakku and tell never-before-told stories including Kylo Ren, Han Solo, Finn, Rey, BB-8, Maz Kanata and more.",
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "original_name": "I've Never Seen Star Wars",
+            "id": 17532,
+            "name": "I've Never Seen Star Wars",
+            "vote_count": 0,
+            "vote_average": 0,
+            "poster_path": "/6Aw9t094n1pqebsEn2sk624bD5j.jpg",
+            "first_air_date": "2009-03-12",
+            "popularity": 0.6,
+            "genre_ids": [
+                35
+            ],
+            "original_language": "en",
+            "backdrop_path": null,
+            "overview": "I've Never Seen Star Wars is a comedy chat show broadcast on BBC Four and BBC Two, first broadcast on 12 March 2009. Created and produced by Bill Dare and hosted by Marcus Brigstocke for the 2009 episodes & Jo Brand for the 2011 special episode, each episode features a celebrity guest trying out new experiences. Based on the original radio version broadcast on BBC Radio 4, the title comes from the fact that Dare has never seen the Star Wars films. An eight part series was recorded in March 2009, with guests including John Humphrys, Esther Rantzen, Rory McGrath and Hugh Dennis.\n\nA new host, Jo Brand, presented a December 2011 episode.",
+            "origin_country": [
+                "GB"
+            ]
+        },
+        {
+            "original_name": "Untitled Star Wars: Rogue One Prequel Series",
+            "id": 83867,
+            "name": "Untitled Star Wars: Rogue One Prequel Series",
+            "vote_count": 0,
+            "vote_average": 0,
+            "poster_path": null,
+            "first_air_date": "",
+            "popularity": 0.6,
+            "genre_ids": [
+                18
+            ],
+            "original_language": "en",
+            "backdrop_path": null,
+            "overview": "The adventures of rebel spy Cassian Andor during the formative years of the Rebellion prior to the events of Rogue One: A Star Wars Story. The series explores tales filled with espionage and daring missions to restore hope to a galaxy in the grip of a ruthless Empire.",
+            "origin_country": [
+                "US"
+            ]
+        }
+    ]
+}
