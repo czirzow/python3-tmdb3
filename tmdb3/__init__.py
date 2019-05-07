@@ -2,12 +2,14 @@
 
 from .tmdb_api import (
     Configuration,
+    discoverMovie,
     searchMovie,
     searchMovieWithYear,
     searchPerson,
     searchStudio,
     searchList,
     searchCollection,
+    discoverTv,
     searchSeries,
     Person,
     Movie,

@@ -134,6 +134,161 @@ names where the year is contained in parentheses, as in:
     >>> list(searchMovieWithYear('Star Wars (1977)'))
     [<Movie 'Star Wars: Episode IV - A New Hope' (1977)>, <Movie 'The Making of 'Star Wars'' (1977)>]
 
+Discovering:
+------------
+
+The `discoverTv()` and `discoverMovie()` methods accepts multiple `kwargs`,
+which tells TMDB to filter the tvshows or movies depending on that keywords.
+The search methods provided by the python3-tmdb3 module return list-like
+structures that will automatically grab new pages as needed, as we do with
+the search methods.
+
+> As a side note:
+> - `discoverTv()`: returns a list-like structure of `Series` instances
+> - `discoverMovie()`: returns a list-like structure of `Movie` instances
+
+**discoverTv `kwargs`**:
+************************
+
+* `sort_by`:
+    - vote_average.desc
+    - vote_average.asc
+    - first_air_date.desc
+    - first_air_date.asc
+    - popularity.desc
+    - popularity.asc
+
+* `first_air_date_year`: A string in the format `yyyy-mm-dd`
+
+* `with_genres`: Comma separated value of genre ids that you want to include in
+the results
+
+* `with_networks`: Comma separated value of network ids that you want to
+include in the results
+
+* `without_genres`: Comma separated value of genre ids that you want to exclude
+from the results
+
+* `without_keywords`: Exclude items with certain keywords. You can comma and
+pipe separate these values to create an 'AND' or 'OR' logic
+
+* `air_date_gte`: Filter and only include TV shows that have a air date (by
+looking at all episodes) that is greater or equal to the specified value
+
+* `air_date_lte`: Filter and only include TV shows that have a air date (by
+looking at all episodes) that is less than or equal to the specified value
+
+
+* `first_air_date_gte`: Filter and only include TV shows that have a original
+air date that is greater or equal to the specified value
+
+* `first_air_date_lte`: Filter and only include TV shows that have a original
+air date that is less than or equal to the specified value
+
+* `vote_average_gte`: Filter and only include movies that have a rating that is
+greater or equal to the specified value
+
+* `vote_count_gte`: Filter and only include movies that have a rating that is
+less than or equal to the specified value
+
+* `with_runtime_gte`: Filter and only include TV shows with an episode runtime
+that is greater than or equal to a value
+
+* `with_runtime_lte`: Filter and only include TV shows with an episode runtime
+that is less than or equal to a value
+
+**discoverMovie `kwargs`**:
+***************************
+
+* `region`: Specify a ISO 3166-1 code to filter release dates. Must be uppercase.
+
+
+* `sort_by`:
+    - popularity.asc
+    - popularity.desc
+    - release_date.asc
+    - release_date.desc
+    - revenue.asc
+    - revenue.desc
+    - primary_release_date.asc
+    - primary_release_date.desc
+    - original_title.asc
+    - original_title.desc
+    - vote_average.asc
+    - vote_average.desc
+    - vote_count.asc
+    - vote_count.desc
+
+* `include_adult`: A filter and include or exclude adult movies.  (true/false)
+
+* `primary_release_year`: A filter to limit the results to a specific primary
+
+* `primary_release_date_gte`: Filter and only include movies that have a
+primary release date that is greater or equal to the specified value.
+
+* `primary_release_date_lte`: Filter and only include movies that have a
+primary release date that is less than or equal to the specified value.
+
+* `release_date_gte`: Filter and only include movies that have a release date
+(looking at all release dates) that is greater or equal to the specified
+value.
+
+* `release_date_lte`: Filter and only include movies that have a release date
+(looking at all release dates) that is less than or equal to the specified
+value.
+
+* `vote_count_gte`: Filter and only include movies that have a vote count that
+is greater or equal to the specified value.
+
+* `vote_count_lte`: Filter and only include movies that have a vote count that
+is less than or equal to the specified value.
+
+* `vote_average_gte`: Filter and only include movies that have a rating that
+is greater or equal to the specified value.
+
+* `vote_average_lte`: Filter and only include movies that have a rating that
+is less than or equal to the specified value.
+
+* `with_cast`: A comma separated list of person ID's. Only include movies that
+have one of the ID's added as an actor.
+
+* `with_crew`: A comma separated list of person ID's. Only include movies that
+have one of the ID's added as a crew member.
+
+* `with_companies`: A comma separated list of production company ID's. Only
+include movies that have one of the ID's added as a production company.
+
+* `with_genres`: Comma separated value of genre ids that you want to include
+in the results.
+
+* `with_keywords`: A comma separated list of keyword ID's. Only include movies
+that have one of the ID's added as a keyword.
+
+* `with_people`: A comma separated list of person ID's. Only include movies
+that have one of the ID's added as a either a actor or a crew member.
+
+* `year`: A filter to limit the results to a specific year (looking at all
+release dates).
+
+* `without_genres`: Comma separated value of genre ids that you want to
+exclude from the results.
+
+* `with_runtime_gte`: Filter and only include movies that have a runtime that
+is greater or equal to a value.
+
+* `with_runtime_lte`: Filter and only include movies that have a runtime that
+is less than or equal to a value.
+
+* `with_release_type`: Specify a comma (AND) or pipe (OR) separated value to
+filter release types by. These release types map to the same values found on
+the movie release date method (minimum: 1, maximum: 6)
+
+* `with_original_language`: Specify an ISO 639-1 string to filter results by
+their original language value.
+
+* `without_keywords`: Exclude items with certain keywords. You can comma and
+pipe separate these values to create an 'AND' or 'OR' logic.
+
 
 Direct Queries
 --------------
