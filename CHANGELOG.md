@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.8.1] - 2019/05/07
+-  Add discover methods:
+     * discoverTv
+     * discoverMovie
 ## [0.8.0] - 2019/03/17
 - CI integration with coverage
 - Add tests
