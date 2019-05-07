@@ -73,7 +73,15 @@ class Request(urllib.request.Request):
         locale = get_locale()
         kwargs = {}
         for k, v in list(self._kwargs.items()):
-            kwargs[k] = locale.encode(v)
+            formatted_key = k
+            for special_ending in {"_gte", "_lte"}:
+                if k.endswith(special_ending):
+                    formatted_key = k.replace(
+                        special_ending, ".{}".format(special_ending[1:])
+                    )
+                    break
+
+            kwargs[formatted_key] = locale.encode(v)
         url = f"{self._base_url}{self._url}?{urllib.parse.urlencode(kwargs)}"
 
         urllib.request.Request.__init__(self, url)
