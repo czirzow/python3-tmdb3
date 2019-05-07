@@ -72,6 +72,132 @@ class Account(NameRepr, Element):
         return get_locale(self.language, self.country)
 
 
+def discoverTv(
+    sort_by=None,
+    first_air_date_year=None,
+    with_genres=None,
+    with_networks=None,
+    without_genres=None,
+    without_keywords=None,
+    air_date_gte=None,
+    ir_date_lte=None,
+    first_air_date_gte=None,
+    first_air_date_lte=None,
+    vote_average_gte=None,
+    vote_count_gte=None,
+    with_runtime_gte=None,
+    with_runtime_lte=None,
+    locale=None,
+):
+    return DiscoverTvSearchResult(
+        Request(
+            "discover/tv",
+            sort_by=sort_by,
+            first_air_date_year=first_air_date_year,
+            with_genres=with_genres,
+            with_networks=with_networks,
+            without_genres=without_genres,
+            without_keywords=without_keywords,
+            air_date_gte=air_date_gte,
+            ir_date_lte=ir_date_lte,
+            first_air_date_gte=first_air_date_gte,
+            first_air_date_lte=first_air_date_lte,
+            vote_average_gte=vote_average_gte,
+            vote_count_gte=vote_count_gte,
+            with_runtime_gte=with_runtime_gte,
+            with_runtime_lte=with_runtime_lte,
+        ),
+        locale=locale,
+    )
+
+
+class DiscoverTvSearchResult(SearchRepr, PagedRequest):
+    """Stores a list of search matches."""
+
+    _name = "Discover Tv"
+
+    def __init__(self, request, locale=None):
+        if locale is None:
+            locale = get_locale()
+        super(DiscoverTvSearchResult, self).__init__(
+            request.new(language=locale.language),
+            lambda x: Series(raw=x, locale=locale),
+        )
+
+
+def discoverMovie(
+    sort_by=None,
+    with_cast=None,
+    with_crew=None,
+    with_genres=None,
+    without_genres=None,
+    with_companies=None,
+    with_keywords=None,
+    without_keywords=None,
+    include_adult=None,
+    year=None,
+    region=None,
+    primary_release_year=None,
+    primary_release_date_gte=None,
+    primary_release_date_lte=None,
+    release_date_gte=None,
+    release_date_lte=None,
+    vote_average_gte=None,
+    vote_average_lte=None,
+    vote_count_gte=None,
+    vote_count_lte=None,
+    with_runtime_gte=None,
+    with_runtime_lte=None,
+    with_release_type=None,
+    with_original_language=None,
+    locale=None,
+):
+    return DiscoverMovieSearchResult(
+        Request(
+            "discover/movie",
+            sort_by=sort_by,
+            with_cast=with_cast,
+            with_crew=with_crew,
+            with_genres=with_genres,
+            without_genres=without_genres,
+            with_companies=with_companies,
+            with_keywords=with_keywords,
+            without_keywords=without_keywords,
+            include_adult=include_adult,
+            year=year,
+            region=region,
+            primary_release_year=primary_release_year,
+            primary_release_date_gte=primary_release_date_gte,
+            primary_release_date_lte=primary_release_date_lte,
+            release_date_gte=release_date_gte,
+            release_date_lte=release_date_lte,
+            vote_average_gte=vote_average_gte,
+            vote_average_lte=vote_average_lte,
+            vote_count_gte=vote_count_gte,
+            vote_count_lte=vote_count_lte,
+            with_runtime_gte=with_runtime_gte,
+            with_runtime_lte=with_runtime_lte,
+            with_release_type=with_release_type,
+            with_original_language=with_original_language,
+        ),
+        locale=locale,
+    )
+
+
+class DiscoverMovieSearchResult(SearchRepr, PagedRequest):
+    """Stores a list of search matches."""
+
+    _name = "Discover Movie"
+
+    def __init__(self, request, locale=None):
+        if locale is None:
+            locale = get_locale()
+        super(DiscoverMovieSearchResult, self).__init__(
+            request.new(language=locale.language),
+            lambda x: Movie(raw=x, locale=locale),
+        )
+
+
 def searchMovie(query, locale=None, adult=False, year=None):
     kwargs = {"query": query, "include_adult": adult}
     if year is not None:

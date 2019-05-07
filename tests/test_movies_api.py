@@ -10,6 +10,7 @@ from httpretty import httprettified
 from datetime import date
 
 from tmdb3.tmdb_api import (
+    DiscoverMovieSearchResult,
     MovieSearchResult,
     AppleTrailer,
     Backdrop,
@@ -18,6 +19,7 @@ from tmdb3.tmdb_api import (
     Studio,
 )
 from tmdb3 import (
+    discoverMovie,
     searchMovie,
     searchMovieWithYear,
     Collection,
@@ -32,6 +34,11 @@ tmdb3_locales.syslocale.encoding = 'utf-8'
 
 # dictionary to hold the data for our movies tests
 test_movie_data = {
+    "movie_discover": (
+        "movie_discover_company_1.json",
+        "{base_url}discover/movie?with_networks=213"
+        "&primary_release_year=2019&api_key={api}",
+    ),
     'movie_search': (
         'movie_search_star_wars_1977.json',
         ('{base_url}search/movie?query=Star+Wars&include_adult=False'
@@ -58,6 +65,21 @@ test_movie_data = {
         '{base_url}movie/11/similar_movies?api_key={api}&language=en&page=1'
     ),
 }
+
+
+@httprettified
+class TestMoviesDiscover(AbstractTestTmdbCase):
+    mock_data = test_movie_data
+    mock_requests = ["movie_discover"]
+
+    def test_results_discoverMovies(self):
+        result = discoverMovie(
+            with_companies="1",
+            year="1977",
+        )
+        self.assertIsInstance(result, DiscoverMovieSearchResult)
+        self.assertEqual(len(result), 2)
+        self.assertIsInstance(result[0], Movie)
 
 
 @httprettified
