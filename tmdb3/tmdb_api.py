@@ -509,7 +509,6 @@ class Trailer(Element):
 
 class YoutubeTrailer(Trailer):
     def geturl(self):
-        self.source = self.source.encode("ascii", errors="ignore")
         return f"http://www.youtube.com/watch?v={self.source}"
 
     def __repr__(self):
