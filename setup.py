@@ -47,4 +47,5 @@ setup(
     install_requires=reqs,
     packages=['tmdb3'],
     keywords='themoviedb.org',
+    python_requires='>=3.6',
 )

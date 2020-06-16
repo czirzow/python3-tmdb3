@@ -13,6 +13,14 @@ found at:
 
   - [Documentation for TheMovieDb's api](https://www.themoviedb.org/documentation/api)
 
+Installing
+----------
+
+To install `python3-tmdb3` you need `Python>=3.6`, `setuptools>=24.2.0` and
+`pip>=9.0.0`:
+
+    $ pip3 install --user https://github.com/opacam/python3-tmdb3/archive/master.zip
+
 Initial Access
 --------------
 
