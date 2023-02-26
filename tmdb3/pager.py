@@ -6,7 +6,14 @@
 # Author: Raymond Wagner
 # -----------------------
 from abc import ABC
-from collections import Sequence, Iterator
+try:
+    from collections.abc import Iterator
+except ImportError:
+    from collections import Iterator
+try:
+    from collections.abc import Sequence
+except ImportError:
+    from collections import Sequence
 
 
 class PagedIterator(Iterator):
