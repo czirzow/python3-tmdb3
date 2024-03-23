@@ -14,6 +14,7 @@ from .cache_engine import Engines
 
 from .cache_null import *
 from .cache_file import *
+from .cache_redis import *
 
 DEBUG = False
 
@@ -50,6 +51,8 @@ class Cache(object):
                 self._age = max(self._age, obj.creation)
 
     def _expire(self):
+        #FIXME: need to fix this.. there isn't v.expire
+        return
         for k, v in list(self._data.items()):
             if v.expired:
                 del self._data[k]
@@ -73,8 +76,19 @@ class Cache(object):
         if self._engine is None:
             raise TMDBCacheError("No cache engine configured")
         self._expire()
+
+        """ 
+        FIXME: confirm this is a good approach.
+           if cache _engine is_remote, we get the data from there.
+           Perhaps change name of property. remote: data is saved outside
+           of this app but locally accessable via key via a service.
+        """
         if key not in self._data:
-            self._import()
+            if self._engine.is_remote:
+                self._data[key] =  self._engine.get(key)
+                #print(f"data is {self._data[key]}")
+            else:
+                self._import()
         try:
             return self._data[key].data
         except:

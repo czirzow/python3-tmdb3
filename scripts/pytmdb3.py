@@ -32,7 +32,8 @@ if __name__ == '__main__':
     if opts.nocache:
         set_cache(engine='null')
     else:
-        set_cache(engine='file', filename='/tmp/pytmdb3.cache')
+        set_cache(engine='redis')
+        #set_cache(engine='file', filename='/tmp/pytmdb3.cache')
 
     if opts.debug:
         request.DEBUG = True
