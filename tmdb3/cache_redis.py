@@ -62,15 +62,15 @@ class RedisEngine(CacheEngine):
 
     def get(self, key):
         data = self.server.get(key)
-        logging.warning(f".get(key): {key} {len(data)}")
+        logging.warning(f".get(key): {key}")
         if data is None:
-            return []
+            return RedisCacheObject(key, {'total_results': 0, 'results': []})
         return RedisCacheObject(key, json.loads(data))
 
     def put(self, key, value, lifetime):
         rc = self.server.set(key, json.dumps(value))
         logging.warning(f"set({key} rc[{rc}]")
-        return value
+        return RedisCacheObject(key, value, lifetime)
 
     def expire(self, key):
         pass
