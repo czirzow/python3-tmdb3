@@ -17,8 +17,8 @@ if __name__ == '__main__':
                       dest="version", help="Display version.")
     parser.add_option('-d', "--debug", action="store_true", default=False,
                       dest="debug", help="Enables verbose debugging.")
-    parser.add_option('-c', "--no-cache", action="store_true", default=False,
-                      dest="nocache", help="Disables request cache.")
+    parser.add_option('-c', "--cache", default="nocache",
+                      dest="cache", help="Which cache to use.")
     opts, args = parser.parse_args()
 
     if opts.version:
@@ -29,11 +29,19 @@ if __name__ == '__main__':
         print("Version: "+__version__)
         sys.exit(0)
 
-    if opts.nocache:
-        set_cache(engine='null')
-    else:
-        set_cache(engine='redis')
-        #set_cache(engine='file', filename='/tmp/pytmdb3.cache')
+    match opts.cache:
+        case "nocache":
+            set_cache(engine='null')
+        case "file":
+            set_cache(engine='file', filename='/tmp/pytmdb3.cache')
+        case "redis":
+            set_cache(engine='redis',
+                      host='localhost',
+                      port=6379,
+                      decode_responses=True)
+        case _:
+            print(f"Invalid cache option of {opts.cache}")
+            exit(1)
 
     if opts.debug:
         request.DEBUG = True
