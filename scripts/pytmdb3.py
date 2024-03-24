@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from optparse import OptionParser
+from argparse import ArgumentParser
 from tmdb3 import *
 
 import sys
@@ -12,15 +12,26 @@ if __name__ == '__main__':
     # http://help.themoviedb.org/kb/api/authentication-basics
     set_key('1acd79ff610c77f3040073d004f7f5b0')
 
-    parser = OptionParser()
-    parser.add_option('-v', "--version", action="store_true", default=False,
-                      dest="version", help="Display version.")
-    parser.add_option('-d', "--debug", action="store_true", default=False,
-                      dest="debug", help="Enables verbose debugging.")
-    parser.add_option('-c', "--cache", default="nocache",
-                      dest="cache", help="Which cache to use.")
-    opts, args = parser.parse_args()
+    parser = ArgumentParser(
+                prog = "pytmdb",
+                description = "Developer Python CLI to interface with TMDB",
+                epilog = "to start")
 
+    parser.add_argument('-v', "--version",
+                        help = 'Display Version.',
+                        action = "store_true",
+                        default = False)
+    parser.add_argument('-d', '--debug',
+                        help = 'Enables verbose debugging.',
+                        action = "store_true",
+                        default = False)
+    parser.add_argument('-c', '--cache',
+                        help = 'Configure which cache engine to use.',
+                        choices = ['null', 'file', 'redis'],
+                        default = 'redis'
+                        )
+
+    opts = parser.parse_args()
     if opts.version:
         from tmdb3.tmdb_api import __title__, __purpose__, __version__, __author__
         print(__title__)
@@ -33,15 +44,14 @@ if __name__ == '__main__':
         case "nocache":
             set_cache(engine='null')
         case "file":
+            print("using file cache")
             set_cache(engine='file', filename='/tmp/pytmdb3.cache')
         case "redis":
+            print("using redis cache")
             set_cache(engine='redis',
                       host='localhost',
                       port=6379,
                       decode_responses=True)
-        case _:
-            print(f"Invalid cache option of {opts.cache}")
-            exit(1)
 
     if opts.debug:
         request.DEBUG = True
