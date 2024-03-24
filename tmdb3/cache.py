@@ -97,7 +97,6 @@ class Cache(object):
                 # FIXME: empty result from _engine.get()
                 self._data[key] =  self._engine.get(key)
                 print(f"DEBUG {key}: {self._data[key]}")
-                self._import(self._data[key])
             else:
                 self._import()
         try:

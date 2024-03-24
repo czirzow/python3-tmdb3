@@ -64,7 +64,7 @@ class RedisEngine(CacheEngine):
         data = self.server.get(key)
         logging.warning(f".get(key): {key}")
         if data is None:
-            return RedisCacheObject(key, {'total_results': 0, 'results': []})
+            return None
         return RedisCacheObject(key, json.loads(data))
 
     def put(self, key, value, lifetime):
