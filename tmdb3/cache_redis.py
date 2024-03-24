@@ -55,7 +55,7 @@ class RedisEngine(CacheEngine):
         self.configure(None)
 
     def configure(self, *args, **kwargs):
-        self.server = redis.Redis(host='localhost', port=6379, decode_responses=True)
+        self.server = redis.Redis(*args, **kwargs)
         pass
 
     @property
