@@ -96,7 +96,8 @@ class Cache(object):
             if self._engine.is_remote:
                 # FIXME: empty result from _engine.get()
                 self._data[key] =  self._engine.get(key)
-                print(f"DEBUG {key}: {self._data[key]}")
+                if DEBUG:
+                    print(f"DEBUG {key}: {self._data[key]}")
             else:
                 self._import()
         try:
@@ -155,7 +156,6 @@ class Cache(object):
             else:
                 key = self.callback()
                 data = self.cache.get(key)
-                print(f"in __call__")
                 if data is None:
                     print(f"data is None")
                     data = self.func(*args, **kwargs)
