@@ -28,8 +28,6 @@ if __name__ == '__main__':
                         default = False)
     parser.add_argument('-c', '--cache',
                         help = 'Configure which cache engine to use.',
-                        choices = ['null', 'file'],
-                        default = 'file'
                         )
 
     opts = parser.parse_args()
@@ -45,6 +43,7 @@ if __name__ == '__main__':
             set_cache(engine='null')
         case "file":
             set_cache(engine='file', filename='/tmp/pytmdb3.cache')
+
 
     if opts.debug:
         request.DEBUG = True
