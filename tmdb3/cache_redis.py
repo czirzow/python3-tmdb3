@@ -11,7 +11,9 @@ from .cache_engine import CacheEngine, CacheObject
 import json
 import redis
 
-import logging
+DEBUG = False
+if DEBUG:
+    import logging
 
 
 class RedisCacheObject(CacheObject):
@@ -53,7 +55,7 @@ class RedisEngine(CacheEngine):
         self.configure(None)
 
     def configure(self, *args, **kwargs):
-        self.server = redis.Redis(host='localhost', port=6379, decode_responses=True)
+        self.server = redis.Redis(*args, **kwargs)
         pass
 
     @property
@@ -62,15 +64,17 @@ class RedisEngine(CacheEngine):
 
     def get(self, key):
         data = self.server.get(key)
-        logging.warning(f".get(key): {key} {len(data)}")
+        if DEBUG:
+            logging.warning(f".get(key): {key}")
         if data is None:
-            return []
+            return None
         return RedisCacheObject(key, json.loads(data))
 
     def put(self, key, value, lifetime):
         rc = self.server.set(key, json.dumps(value))
-        logging.warning(f"set({key} rc[{rc}]")
-        return value
+        if DEBUG:
+            logging.warning(f"set({key} rc[{rc}]")
+        return RedisCacheObject(key, value, lifetime)
 
     def expire(self, key):
         pass

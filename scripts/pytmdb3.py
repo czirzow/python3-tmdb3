@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-from optparse import OptionParser
+from argparse import ArgumentParser
 from tmdb3 import *
+from tmdb3 import __title__, __purpose__, __version__, __author__
 
 import sys
 
@@ -12,33 +13,48 @@ if __name__ == '__main__':
     # http://help.themoviedb.org/kb/api/authentication-basics
     set_key('1acd79ff610c77f3040073d004f7f5b0')
 
-    parser = OptionParser()
-    parser.add_option('-v', "--version", action="store_true", default=False,
-                      dest="version", help="Display version.")
-    parser.add_option('-d', "--debug", action="store_true", default=False,
-                      dest="debug", help="Enables verbose debugging.")
-    parser.add_option('-c', "--no-cache", action="store_true", default=False,
-                      dest="nocache", help="Disables request cache.")
-    opts, args = parser.parse_args()
+    parser = ArgumentParser(
+                prog = "pytmdb",
+                description = "Developer Python CLI to interface with TMDB",
+                epilog = "to start")
 
+    parser.add_argument('-v', "--version",
+                        help = 'Display Version.',
+                        action = "store_true",
+                        default = False)
+    parser.add_argument('-d', '--debug',
+                        help = 'Enables verbose debugging.',
+                        action = "store_true",
+                        default = False)
+    parser.add_argument('-c', '--cache',
+                        help = 'Configure which cache engine to use.',
+                        choices = ['null', 'file', 'redis'],
+                        default = 'redis'
+                        )
+
+    opts = parser.parse_args()
     if opts.version:
-        from tmdb3.tmdb_api import __title__, __purpose__, __version__, __author__
         print(__title__)
         print("")
         print(__purpose__)
         print("Version: "+__version__)
         sys.exit(0)
 
-    if opts.nocache:
-        set_cache(engine='null')
-    else:
-        set_cache(engine='redis')
-        #set_cache(engine='file', filename='/tmp/pytmdb3.cache')
+    match opts.cache:
+        case "nocache":
+            set_cache(engine='null')
+        case "file":
+            set_cache(engine='file', filename='/tmp/pytmdb3.cache')
+        case "redis":
+            set_cache(engine='redis',
+                      host='localhost',
+                      port=6379,
+                      decode_responses=True)
 
     if opts.debug:
         request.DEBUG = True
 
-    banner = 'PyTMDB3 Interactive Shell.'
+    banner = f'PyTMDB3v{__version__} w/{opts.cache} cache and debug is {opts.debug}'
     import code
     try:
         import readline, rlcompleter
@@ -46,7 +62,7 @@ if __name__ == '__main__':
         pass
     else:
         readline.parse_and_bind("tab: complete")
-        banner += ' TAB completion available.'
+        banner += ' (TAB completion available.)'
     namespace = globals().copy()
     namespace.update(locals())
     code.InteractiveConsole(namespace).interact(banner)
