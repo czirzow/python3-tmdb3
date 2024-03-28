@@ -2,6 +2,7 @@
 
 from argparse import ArgumentParser
 from tmdb3 import *
+from tmdb3 import __title__, __purpose__, __version__, __author__
 
 import sys
 
@@ -33,7 +34,6 @@ if __name__ == '__main__':
 
     opts = parser.parse_args()
     if opts.version:
-        from tmdb3.tmdb_api import __title__, __purpose__, __version__, __author__
         print(__title__)
         print("")
         print(__purpose__)
@@ -44,10 +44,8 @@ if __name__ == '__main__':
         case "nocache":
             set_cache(engine='null')
         case "file":
-            print("using file cache")
             set_cache(engine='file', filename='/tmp/pytmdb3.cache')
         case "redis":
-            print("using redis cache")
             set_cache(engine='redis',
                       host='localhost',
                       port=6379,
@@ -56,7 +54,7 @@ if __name__ == '__main__':
     if opts.debug:
         request.DEBUG = True
 
-    banner = 'PyTMDB3 Interactive Shell.'
+    banner = f'PyTMDB3v{__version__} w/{opts.cache} cache and debug is {opts.debug}'
     import code
     try:
         import readline, rlcompleter
@@ -64,7 +62,7 @@ if __name__ == '__main__':
         pass
     else:
         readline.parse_and_bind("tab: complete")
-        banner += ' TAB completion available.'
+        banner += ' (TAB completion available.)'
     namespace = globals().copy()
     namespace.update(locals())
     code.InteractiveConsole(namespace).interact(banner)
