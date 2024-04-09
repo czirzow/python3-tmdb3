@@ -28,8 +28,9 @@ if __name__ == '__main__':
                         default = False)
     parser.add_argument('-c', '--cache',
                         help = 'Configure which cache engine to use.',
-                        choices = ['null', 'file'],
-                        default = 'file'
+                        choices = ['null', 'file', 'redis'],
+                        default = 'redis'
+
                         )
 
     opts = parser.parse_args()
@@ -45,6 +46,11 @@ if __name__ == '__main__':
             set_cache(engine='null')
         case "file":
             set_cache(engine='file', filename='/tmp/pytmdb3.cache')
+        case "redis":
+            set_cache(engine='redis',
+                      host='localhost',
+                      port=6379,
+                      decode_responses=True)
 
     if opts.debug:
         request.DEBUG = True
