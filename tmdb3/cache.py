@@ -42,12 +42,9 @@ class Cache(object):
     def _import(self, data=None):
 
         if data is None:
-            print("data is none")
             data = self._engine.get(self._age)
 
-        #FIXME: work on this
         if self._engine.is_remote:
-            print(f"in _import {data}")
             self._data[data.key] = data
             return
 
@@ -94,7 +91,6 @@ class Cache(object):
         """
         if key not in self._data:
             if self._engine.is_remote:
-                # FIXME: empty result from _engine.get()
                 self._data[key] =  self._engine.get(key)
                 if DEBUG:
                     print(f"DEBUG {key}: {self._data[key]}")
@@ -157,12 +153,10 @@ class Cache(object):
                 key = self.callback()
                 data = self.cache.get(key)
                 if data is None:
-                    print(f"data is None")
                     data = self.func(*args, **kwargs)
                     if hasattr(self.inst, "lifetime"):
                         self.cache.put(key, data, self.inst.lifetime)
                     else:
-                        print("hasattr not lifetime")
                         self.cache.put(key, data)
                 return data
 
