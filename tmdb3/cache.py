@@ -14,6 +14,7 @@ from .cache_engine import Engines
 
 from .cache_null import *
 from .cache_file import *
+from .cache_redis import *
 
 DEBUG = False
 
@@ -39,8 +40,17 @@ class Cache(object):
         self.configure(engine, *args, **kwargs)
 
     def _import(self, data=None):
+
         if data is None:
+            print("data is none")
             data = self._engine.get(self._age)
+
+        #FIXME: work on this
+        if self._engine.is_remote:
+            print(f"in _import {data}")
+            self._data[data.key] = data
+            return
+
         for obj in sorted(data, key=lambda x: x.creation):
             self._rate_limiter.append(obj.creation)
             if len(self._rate_limiter) > 30:
@@ -50,6 +60,8 @@ class Cache(object):
                 self._age = max(self._age, obj.creation)
 
     def _expire(self):
+        #FIXME: need to fix this.. there isn't v.expire
+        return
         for k, v in list(self._data.items()):
             if v.expired:
                 del self._data[k]
@@ -73,8 +85,21 @@ class Cache(object):
         if self._engine is None:
             raise TMDBCacheError("No cache engine configured")
         self._expire()
+
+        """ 
+        FIXME: confirm this is a good approach.
+           if cache _engine is_remote, we get the data from there.
+           Perhaps change name of property. remote: data is saved outside
+           of this app but locally accessable via key via a service.
+        """
         if key not in self._data:
-            self._import()
+            if self._engine.is_remote:
+                # FIXME: empty result from _engine.get()
+                self._data[key] =  self._engine.get(key)
+                if DEBUG:
+                    print(f"DEBUG {key}: {self._data[key]}")
+            else:
+                self._import()
         try:
             return self._data[key].data
         except:
@@ -132,10 +157,12 @@ class Cache(object):
                 key = self.callback()
                 data = self.cache.get(key)
                 if data is None:
+                    print(f"data is None")
                     data = self.func(*args, **kwargs)
                     if hasattr(self.inst, "lifetime"):
                         self.cache.put(key, data, self.inst.lifetime)
                     else:
+                        print("hasattr not lifetime")
                         self.cache.put(key, data)
                 return data
 

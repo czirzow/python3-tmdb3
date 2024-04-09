@@ -23,6 +23,9 @@ cache = Cache(filename="pytmdb3.cache")
 # DEBUG = True
 # cache = Cache(engine='null')
 
+# DEBUG = True
+# cache = Cache(engine='redis')
+
 
 def set_key(key):
     """

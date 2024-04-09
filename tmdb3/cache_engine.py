@@ -52,6 +52,11 @@ class CacheEngine(object, metaclass=CacheEngineType):
     def __init__(self, parent):
         self.parent = ref(parent)
 
+    @property
+    def is_remote(self):
+        return False
+
+
     def configure(self):
         raise RuntimeError
 
