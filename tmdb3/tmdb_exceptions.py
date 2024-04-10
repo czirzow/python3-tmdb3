@@ -22,6 +22,7 @@ class TMDBError(Exception):
     CacheDirectoryError = 73
     ImageSizeError = 80
     HTTPError = 90
+    RedisError = 91
     Offline = 100
     LocaleError = 110
 
@@ -98,6 +99,9 @@ class TMDBHTTPError(TMDBError):
         self.response = err.fp.read()
         super(TMDBHTTPError, self).__init__(str(err))
 
+class TMDBRedisError(TMDBError):
+    def __init__(self, err):
+        super(TMDBRedisError, self).__init__(str(err))
 
 class TMDBOffline(TMDBError):
     pass

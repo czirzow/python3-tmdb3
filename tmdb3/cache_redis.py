@@ -7,6 +7,7 @@
 # Purpose: Cache with a redis. 
 # -----------------------
 
+from .tmdb_exceptions import *
 from .cache_engine import CacheEngine, CacheObject
 import json
 
@@ -58,8 +59,12 @@ class RedisEngine(CacheEngine):
         self.configure(None)
 
     def configure(self, *args, **kwargs):
-        self.server = redis.Redis(*args, **kwargs)
-        pass
+        try:
+            self.server = redis.Redis(*args, **kwargs)
+            self.server.ping()
+        except Exception as error:
+            raise TMDBRedisError(error)
+
 
     @property
     def is_remote(self):
